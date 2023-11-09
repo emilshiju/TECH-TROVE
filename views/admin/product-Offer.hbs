@@ -1,0 +1,127 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+<style>
+
+    /* Define a common class for the buttons */
+.common-button {
+    width: 100px; /* You can adjust the width as needed to make the buttons the same size */
+    display: inline-block; /* Ensures the buttons are displayed on the same line */
+    margin-right: 10px; /* Add spacing between the buttons if desired */
+}
+
+</style>
+        <section class="content-main">
+         
+            <div class="card mb-4">
+                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Offer</th>
+                                    <th scope="col" class="text-center"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each product}}
+                                <tr>
+                                    <td class="image product-thumbnail"><img src="{{getFirstImageUrl this.images}}" style="height: 80px;width:80px" alt="#"></td>
+                                    <td><b>{{this.name}}</b></td>
+                                    <td>{{this.price}}</td>
+                                    
+                                    <td style="width: 190px;">
+                                        <input type="text" id="offerValue{{this._id}}"  value="{{this.offer}}" >
+                                        </td>
+                                   <td class="text-center"  style="width: 150px;">
+                                    <button class="btn btn-success"  onclick="editOffer('{{this._id}}')">Save</button>
+                                       {{!-- <a href="/get-edit-Offer?id={{this._id}}" class="btn btn-md rounded font-sm common-button">Save</a> --}}
+                                       <br>
+                                       <br>
+                                         <button class="btn btn-sm btn-primary" onclick="removeOffer('{{this._id}}')" >Remove</button>
+                                        {{!-- <a href="" class="btn btn-md rounded font-sm common-button">Remove</a> --}}
+                                   </td>
+
+                                  
+                                </tr>
+                                  {{/each}}
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+           
+        </section> <!-- content-main end// -->
+       
+
+
+ 
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        
+        
+
+      
+
+
+       
+    
+        function editOffer(proId){
+            
+        let offerValue=document.getElementById('offerValue'+proId).value
+      
+
+            if(offerValue==0){
+                Swal.fire("make a change")
+                return false
+            }
+
+            $.ajax({
+                url:"/edit-product-Offer",
+                method:'POST',
+                data:{
+                    productId:proId,
+                    offerValue:offerValue
+                },
+                success:(response)=>{
+                    Swal.fire(response.message)
+                }
+            })
+        }
+        
+
+
+        function removeOffer(proId){
+             Swal.fire({
+         title: "Are you sure you want to remove?",
+        showCancelButton: true, // This option enables the cancel button
+        confirmButtonText: "Yes, remove", // Text for the confirm (yes) button
+        cancelButtonText: "Cancel", 
+       }).then((result)=>{
+        if(result.isConfirmed){
+             $.ajax({
+                url:"/remove-Product-Offer",
+                method:'POST',
+                data:{
+                    productId:proId
+                },
+                 success:(response)=>{
+                    Swal.fire(response.message)
+                    $('#offerValue').val('0');
+                 
+                }
+            })
+        }
+        })
+       }
+           
+        
+    </script>

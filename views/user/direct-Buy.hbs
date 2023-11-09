@@ -1,0 +1,704 @@
+<style>
+  .card-body {
+    font-size: 20px; /* Adjust the font size as needed */
+  }
+
+  .card-body h5 {
+    margin: 10px 0; /* Adjust the margin as needed */
+  }
+</style>
+ 
+ {{>user-partials/userHeader}}
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-top">
+                <div class="mobile-header-logo">
+                    <a href="index.html"><img src="assets/imgs/theme/logo.svg" alt="logo"></a>
+                </div>
+                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                    <button class="close-style search-close">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-header-content-area">
+                <div class="mobile-search search-style-3 mobile-header-border">
+                    <form action="#">
+                        <input type="text" placeholder="Search for items…">
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-wrap mobile-header-border">
+                    <div class="main-categori-wrap mobile-header-border">
+                        <a class="categori-button-active-2" href="#">
+                            <span class="fi-rs-apps"></span> Browse Categories
+                        </a>
+                        <div class="categori-dropdown-wrap categori-dropdown-active-small">
+                            <ul>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-dress"></i>Women's Clothing</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-tshirt"></i>Men's Clothing</a></li>
+                                <li> <a href="shop-grid-right.html"><i class="evara-font-smartphone"></i> Cellphones</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>Computer & Office</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-cpu"></i>Consumer Electronics</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-home"></i>Home & Garden</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-high-heels"></i>Shoes</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-teddy-bear"></i>Mother & Kids</a></li>
+                                <li><a href="shop-grid-right.html"><i class="evara-font-kite"></i>Outdoor fun</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- mobile menu start -->
+                    <nav>
+                        <ul class="mobile-menu">
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="index.html">Home</a>
+                                <ul class="dropdown">
+                                    <li><a href="index.html">Home 1</a></li>
+                                    <li><a href="index-2.html">Home 2</a></li>
+                                    <li><a href="index-3.html">Home 3</a></li>
+                                    <li><a href="index-4.html">Home 4</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop-grid-right.html">shop</a>
+                                <ul class="dropdown">
+                                    <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
+                                    <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
+                                    <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
+                                    <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
+                                    <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Single Product</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
+                                            <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
+                                            <li><a href="shop-product-full.html">Product – No sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="shop-filter.html">Shop – Filter</a></li>
+                                    <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
+                                    <li><a href="shop-cart.html">Shop – Cart</a></li>
+                                    <li><a href="shop-checkout.html">Shop – Checkout</a></li>
+                                    <li><a href="shop-compare.html">Shop – Compare</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Mega menu</a>
+                                <ul class="dropdown">
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop-product-right.html">Dresses</a></li>
+                                            <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
+                                            <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
+                                            <li><a href="shop-product-right.html">Women's Sets</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Men's Fashion</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop-product-right.html">Jackets</a></li>
+                                            <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
+                                            <li><a href="shop-product-right.html">Genuine Leather</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Technology</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop-product-right.html">Gaming Laptops</a></li>
+                                            <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
+                                            <li><a href="shop-product-right.html">Tablets</a></li>
+                                            <li><a href="shop-product-right.html">Laptop Accessories</a></li>
+                                            <li><a href="shop-product-right.html">Tablet Accessories</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog-category-fullwidth.html">Blog</a>
+                                <ul class="dropdown">
+                                    <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
+                                    <li><a href="blog-category-list.html">Blog Category List</a></li>
+                                    <li><a href="blog-category-big.html">Blog Category Big</a></li>
+                                    <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
+                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Single Product Layout</a>
+                                        <ul class="dropdown">
+                                            <li><a href="blog-post-left.html">Left Sidebar</a></li>
+                                            <li><a href="blog-post-right.html">Right Sidebar</a></li>
+                                            <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="page-about.html">About Us</a></li>
+                                    <li><a href="page-contact.html">Contact</a></li>
+                                    <li><a href="page-account.html">My Account</a></li>
+                                    <li><a href="page-login-register.html">login/register</a></li>
+                                    <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
+                                    <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
+                                    <li><a href="page-terms.html">Terms of Service</a></li>
+                                    <li><a href="page-404.html">404 Page</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">French</a></li>
+                                    <li><a href="#">German</a></li>
+                                    <li><a href="#">Spanish</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- mobile menu end -->
+                </div>
+                <div class="mobile-header-info-wrap mobile-header-border">
+                    <div class="single-mobile-header-info mt-30">
+                        <a  href="page-contact.html"> Our location </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="page-login-register.html">Log In / Sign Up </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="#">(+01) - 2345 - 6789 </a>
+                    </div>
+                </div>
+                <div class="mobile-social-icon">
+                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+                    <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="index.html" rel="nofollow">Home</a>
+                    <span></span> Shop
+                    <span></span> Checkout
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+
+
+                    {{!-- <div class="col-lg-6 mb-sm-15">
+                        <div class="toggle_info">
+                            <span><i class="fi-rs-user mr-10"></i><span class="text-muted">Already have an account?</span> <a href="#loginform" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to login</a></span>
+                        </div>
+                        <div class="panel-collapse collapse login_form" id="loginform">
+                            <div class="panel-body">
+                                <p class="mb-30 font-sm">If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <input type="text" name="email" placeholder="Username Or Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" placeholder="Password">
+                                    </div>
+                                    <div class="login_footer form-group">
+                                        <div class="chek-form">
+                                            <div class="custome-checkbox">
+                                                <input class="form-check-input" type="checkbox" name="checkbox" id="remember" value="">
+                                                <label class="form-check-label" for="remember"><span>Remember me</span></label>
+                                            </div>
+                                        </div>
+                                        <a href="#">Forgot password?</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-md" name="login">Log in</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div> --}}
+                  
+                    <div class="col-lg-6">
+                        {{!-- <div class="toggle_info">
+                            <span><i class="fi-rs-label mr-10"></i><span class="text-muted">Have a coupon?</span> <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your code</a></span>
+                        </div> --}}
+                        <div class="panel-collapse collapse coupon_form " id="coupon">
+                            <div class="panel-body">
+                                <p class="mb-30 font-sm">If you have a coupon code, please apply it below.</p>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter Coupon Code...">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn  btn-md" name="login">Apply Coupon</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- <div class="row">
+                    <div class="col-12">
+                        <div class="divider mt-50 mb-50"></div>
+                    </div>
+                </div> --}}
+                 {{#if flash}}
+                    <div class="alert alert-success alert-dimissible fase show" role="alert">
+                {{flash}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+                 {{/if}}
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        {{#if show}}
+                        <br>
+                        {{#if notadd}}
+                        <button onclick="window.location.href=`/oder-direct-buy?add=true&id={{product._id}}`" class="btn btn-success" >Add</button>
+                        {{/if}}
+                         <button  onclick="window.location.href=`/directBuy-address-delete?delete={{ans._id}}&id={{product._id}}`"  class="btn btn-success">Delete</button>
+                        <button  onclick="window.location.href='/oder-direct-buy?edit=true&number={{num}}&id={{product._id}}'"  class="btn btn-success">Edit</button>
+                         <div class="col-lg-6" >
+                                <div class="card">
+                                    <div class="card-header">
+                                            <h5 class="mb-0">Shipping Address</h5>
+                                            
+                                    </div>
+                                    {{!-- {{#each ans}}
+                                    <div class="card-body">
+                                       <h5> Name:{{this.name}}</h5>
+                                       <h5>Addresss:{{this.address}}</h5>
+                                       <h5>Locality:{{this.locality}}</h5>
+                                       <h5>City:{{this.city}}</h5>
+                                       <h5>Pincode:{{this.pincode}}</h5>
+                                       <h5>State:{{this.state}}</h5>
+                                    </div>
+                                    {{/each}} --}}
+                                     {{!-- {{#each ans}} --}}
+                                    <div class="card-body">
+                                       <h5> Name:{{ans.name}}</h5>
+                                       <h5>Addresss:{{ans.address}}</h5>
+                                       <h5>Locality:{{ans.locality}}</h5>
+                                       <h5>City:{{ans.city}}</h5>
+                                       <h5>Pincode:{{ans.pincode}}</h5>
+                                       <h5>State:{{ans.state}}</h5>
+                                    </div>
+                                   
+                                </div>
+                                <div class="pagination-area mt-15 mb-50">
+                                          <nav aria-label="Page navigation example">
+                                              <ul class="pagination justify-content-start">
+                                               
+                                                {{#each (counts count) as |page|}}
+                                                      <li class="page-item  {{#if (eq ../num page)}}active{{/if}} ">
+                                                       <a class="page-link" href="/checkout?number={{page}}">{{page}}</a>
+                                                          </li>
+                                                  {{/each}}
+                                              </ul>
+                                              </nav>
+                                        </div>
+                                        
+                              
+                        </div>
+
+                        {{/if}}
+                        
+                      {{#if add}}
+                          <div class="row">
+
+                            <form action="/directBuy-addres-edit"  method="post" id="saveForm"  onsubmit="return saveForm(event)">
+                                <div class="form-group col-md-6">
+                                    <label>Enter Name *</label>
+                                <input  id="name" class="form-control " onkeyup="nameValidation()" name="name"  type="text">
+                                        <span id="nameError"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Enter Locality *</label>
+                                    <input  id="locality" class="form-control " onkeyup="localityValidation()"  name="locality">
+                                    <span id="localityError"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                <label>City *</label>
+                                <input  id="city" class="form-control " onkeyup="cityValidation()" name="city"  type="text">
+                                   <span id="cityError"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Pincode *</label>
+                                    <input  id="pincode" class="form-control " onkeyup="pincodeValidation()" name="pincode" type="text">
+                                    <span id="pincodeError"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                        <label>state *</label>
+                                        <input   id="state" class="form-control "  onkeyup="stateValidation()"  name="state">
+                                        <span id="stateError"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                        <label>Mobile Number *</label>
+                                        <input  id="mobilenumber" class="form-control" onkeyup="mobileValidation()"   name="mobile" type="text">
+                                        <span id="mobilenumberError"></span>
+                                </div>
+                                <div class="form-group col-md-8">
+                                        <label>Address *</label> 
+                                            <input   id="textarea" class="form-control" onkeyup="addressValidation()" name="address"  type="text">
+                                         <span id="addressError"></span>
+                                                            
+                                </div>
+                                <div class="col-md-6">
+                                      <button type="submit"  >Save</button>
+                                      <input type="hidden" name="productId" value="{{product._id}}"> 
+                                      <input type="hidden" name="index" value="{{num}}">
+                                    </div>
+                                    </form>
+                                </div>
+                                {{/if}}
+                        
+                    
+    
+                        {{#if edit}}
+                         <div class="row">
+                           {{!-- {{#each  address}} --}}
+                            <form action="/directBuy-addres-edit"  method="post" id="form"  onsubmit="return formsubmit(event)">
+                                <div class="form-group col-md-6">
+                                    <label>Enter Name *</label>
+                                <input  id="name" class="form-control " onkeyup="nameValidation()" name="name" value="{{ans.name}}" type="text">
+                                        <span id="nameError"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Enter Locality *</label>
+                                    <input  id="locality" class="form-control " onkeyup="localityValidation()" value="{{ans.locality}}" name="locality">
+                                    <span id="localityError"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                <label>City *</label>
+                                <input  id="city" class="form-control " onkeyup="cityValidation()" name="city" value="{{ans.city}}" type="text">
+                                   <span id="cityError"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Pincode *</label>
+                                    <input  id="pincode" class="form-control " onkeyup="pincodeValidation()" name="pincode" value="{{ans.pincode}}" type="text">
+                                    <span id="pincodeError"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                        <label>state *</label>
+                                        <input   id="state" class="form-control "  onkeyup="stateValidation()" value="{{ans.state}}" name="state">
+                                        <span id="stateError"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                        <label>Mobile Number *</label>
+                                        <input  id="mobilenumber" class="form-control" onkeyup="mobileValidation()"  value={{ans.mobileNumber}} name="mobile" type="text">
+                                        <span id="mobilenumberError"></span>
+                                </div>
+                                <div class="form-group col-md-8">
+                                        <label>Address *</label> 
+                                            <input   id="textarea" class="form-control" onkeyup="addressValidation()" name="address" value="{{ans.address}}" type="text">
+                                         <span id="addressError"></span>
+                                                            
+                                </div>
+                                  <input type="hidden" name="value" value="{{ans._id}}">
+                                <div class="col-md-6">
+                                      <button type="submit"  >Save</button>
+                                       <input type="hidden" name="productId" value="{{product._id}}">   
+                                      <input type="hidden" name="index" value="{{num}}">
+                                    </div>
+                                    </form>
+                                    {{!-- {{/each}} --}}
+                                </div>
+                        {{/if}}
+                    </div>
+
+
+
+              
+                    <div class="col-md-6">
+                         <form id="checkOut-form">
+                        <div class="order_review">
+                            <div class="mb-20">
+                                <h4>Your Orders</h4>
+                            </div>
+                            <div class="table-responsive order_table text-center">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Product</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{!-- {{#each product}} --}}
+                                        <tr>
+                                            <td class="image product-thumbnail"><img src="{{getFirstImageUrl   product.images}}" alt="#"></td>
+                                            <td>
+                                                <h5><a href="shop-product-full.html">{{ product.name}}</a></h5> <span class="product-qty" id="quantityss" >*1</span>
+                                            </td>
+                                            <td>{{product.price}}</td>
+                                        </tr>
+                                      {{!-- {{/each}} --}}
+                                     
+                                        <tr>
+                                            <th>SubTotal</th>
+                                            <td class="product-subtotal" colspan="2">{{product.price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Shipping</th>
+                                            <td colspan="2"><em>Free Shipping</em></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">${{product.price}}</span></td>
+                                        </tr>
+
+                                        
+                                        <input type="hidden" name="discountPercentage" value="0">
+                                        <input type="hidden" name="discountAmount" value="0">
+                                        {{!-- <input type="hidden" name="total" value="{{oderTotal cart}}"> --}}
+                                        {{#if ans}}
+                                        <input type="hidden" name="address" value="{{ans._id}}">
+                                        {{!-- <input type="hidden" name="address" value="{{getFirstAddres address}}"> --}}
+                                        {{/if}}
+                                        <input type="hidden" name="productId" value="{{product._id}}">
+                                        
+                                              
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                            <div class="payment_method">
+                                <div class="mb-25">
+                                    <h5>Payment</h5>
+                                </div>
+                                <div class="payment_option">
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" required="" type="radio" name="paymentOption" value="" id="exampleRadios3" checked="">
+                                        <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">Wallet</label>
+                                       
+                                    </div>
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" required="" type="radio" name="paymentOption"  value="cod"  id="exampleRadios4" checked="">
+                                        <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">Cash On Delivey</label>
+                                       
+                                    </div>
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" required="" type="radio" name="paymentOption"  value="" id="exampleRadios5" checked="">
+                                        <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Razorpay</label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                          </form>
+                            <a  class="btn btn-fill-out btn-block mt-30"  onclick="procedToPayment(event)">Place Order</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    {{>user-partials/userFooter}}
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+    <script>
+
+        
+        function nameValidation(){
+        const name=document.getElementById('name').value
+          const nameRegex=/^[a-zA-Z]+(?: [a-zA-Z]+)+$/
+               const nameError=document.getElementById('nameError')
+          if(name.trim().length===0){
+            nameError.innerHTML='field is required',
+            nameError.style.color='red'
+            return false
+          }
+          if(!name.match(nameRegex)){
+            nameError.innerHTML='enter valid field',
+            nameError.style.color='red'
+            return false
+          }
+
+          nameError.innerHTML=""
+          return true
+        
+        }
+        function localityValidation(){
+            
+        const locality=document.getElementById('locality').value
+          const localityError=document.getElementById('localityError')
+        const localityRegex=/^[a-zA-Z0-9\s\-]+$/
+
+            if(locality.trim().length===0){
+                localityError.innerHTML='feild is required',
+                localityError.style.color='red'
+                return false
+            }
+
+            if(!locality.match(localityRegex)){
+                localityError.innerHTML='enter valid feild',
+                localityError.style.color='red'
+                return false
+            }
+
+            localityError.innerHTML=""
+            return true
+        }
+        function cityValidation(){
+         const city=document.getElementById('city').value
+        const cityError=document.getElementById('cityError')
+        const cityRegex=/^[a-zA-Z0-9\s'\-]+$/
+
+            if(city.trim().length===0){
+                cityError.innerHTML='feild is required',
+                cityError.style.color='red'
+                return false
+            }
+            if(!city.match(cityRegex)){
+                cityError.innerHTML='feild is required',
+                cityError.style.color='red'
+                return false
+            }
+            cityError.innerHTML=""
+            return true
+        }
+        function pincodeValidation(){
+            const pincode=document.getElementById('pincode').value
+        const pincodeError=document.getElementById('pincodeError')
+          const pincodeRegex=/^\d{5}$/
+
+            if(pincode.trim().length===0){
+                pincodeError.innerHTML='feild is required',
+                pincodeError.style.color='red'
+                return false
+            }
+
+            if(!pincode.match(pincodeRegex)){
+                 pincodeError.innerHTML='feild is required',
+                pincodeError.style.color='red'
+                return false
+            }
+            pincodeError.innerHTML=""
+            return true
+        }
+        function stateValidation(){
+         const state=document.getElementById('state').value
+        const stateError=document.getElementById('stateError')
+          
+        const stateRegex= /^[a-zA-Z0-9\s\-]+$/
+
+            if(state.trim().length===0){
+                stateError.innerHTML='feild is required',
+                stateError.style.color='red'
+                return false
+            }
+            if(!state.match(stateRegex)){
+                stateError.innerHTML='feild is required',
+            stateError.style.color='red'
+                return false
+            }
+            stateError.innerHTML=""
+            return true
+        }
+        function mobileValidation(){
+          const mobile=document.getElementById('mobilenumber').value
+          const mobileError=document.getElementById('mobilenumberError')
+          const mobileRegex=/^-?\d+(\.\d+)?$/;
+
+            if(mobile.trim().length===0){
+                mobileError.innerHTML='feild is required',
+                mobileError.style.color='red'
+                return false
+            }
+            if(!mobile.match(mobileRegex)){
+                mobileError.innerHTML='feild is required',
+                mobileError.style.color='red'
+                return false
+            }
+            mobileError.innerHTML=""
+            return true
+        }
+        function addressValidation(){
+             const address=document.getElementById('textarea').value
+ const addressError=document.getElementById('addressError')
+        const addressRegex = /^[a-zA-Z0-9\s,'-]+$/;
+
+            if(address.trim().length===0){
+                addressError.innerHTML='feild is requied',
+                addressError.style.color='red'
+                return false
+            }
+            if(!address.match(addressRegex)){
+                  addressError.innerHTML='feild is requied',
+                addressError.style.color='red'
+                return false
+            }
+            addressError.innerHTML=""
+            return true
+        }
+
+
+        function formsubmit(event){
+             event.preventDefault()
+
+             if(nameValidation()&&localityValidation()&&cityValidation()&&pincodeValidation()&&stateValidation()&&mobileValidation()&&addressValidation()){
+
+                document.getElementById('form').submit()
+                return true
+             }else{
+                return false
+             }
+
+        }
+
+        function saveForm(event){
+              event.preventDefault()
+              if(nameValidation()&&localityValidation()&&cityValidation()&&pincodeValidation()&&stateValidation()&&mobileValidation()&&addressValidation()){
+                   
+                document.getElementById('saveForm').submit()
+                return true
+             }else{
+                return false
+             }
+        }
+
+    </script>
+
+    <script>
+
+
+       
+        const ifcart=document.getElementById('noCart')
+
+        function procedToPayment(event){
+ 
+            event.preventDefault()
+            $.ajax({
+                url:'/direct-buy-product',
+                method:'POST',
+                data:$('#checkOut-form').serialize(),
+                success:(response)=>{
+                    if(response.status){
+                      Swal.fire(response.message)
+                       setTimeout(()=>{
+                        window.location.href='/'
+                       },2000) 
+                     
+                    }else{
+                          Swal.fire(response.message)
+                    }
+                }
+
+            })
+
+        }
+        
+    </script>

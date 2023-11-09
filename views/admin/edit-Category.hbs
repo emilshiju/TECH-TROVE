@@ -1,0 +1,90 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+<style>
+  .alert {
+    font-size: medium;
+  }
+
+  .close {
+    font-size: 20px; 
+  }
+</style>
+        <section class="content-main ">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Categories </h2>
+                    <p>Add, edit or delete a category</p>
+                </div>
+                
+                 {{!-- <div style="display: none;" id="alertCategory" class=" alert alert-success alert-dismissible fade show" role="alert">
+                    <div id="printAlertCategory">
+
+                    </div>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+               </div> --}}
+            
+
+                <div>
+                    <input type="text" placeholder="Search Categories" class="form-control bg-white ">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body  bg-light">
+                    {{#each categories}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form  id="categoryForm" action="/edit-Category/{{this._id}}" method="POST">
+                                <div class="mb-4">
+                                    <label class="form-label">Name</label>
+                                    <input type="text"  id="title"  name="title" value="{{this.title}}"  class="form-control" >
+                                    <span id="titleError"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <input  name="description" id="description" value="{{this.description}}"  class="form-control" ></input>
+                                    <span id="descriptionError"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label"> Max Discount (Rs)</label>
+                                    <input type="number" id="categoryOffer"  name="categoryOffer" value="{{this.categoryOffer}}" class="form-control">
+                                    <span id="maxDiscountValueError"></span>
+                                </div>
+                                 <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="fomr-label">status</label>
+                                        <select class="form-select" name="status">
+                                           <option value="false" name="status">Active</option>
+                                           <option value="true" name="status">Disable</option>
+                                           </select>
+                                    </div>
+                                </div>
+                                
+                                {{#if exists}}
+                                <span>{{exists}}</span>
+                                {{/if}}
+                                <br>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary"  >Update category</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {{/each}}
+                        </div> <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+      
+        {{>admin-partials/adminFooter}}
+    </main>
+
+</body>
+
+
+
+
+

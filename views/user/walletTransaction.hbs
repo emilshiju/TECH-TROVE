@@ -1,0 +1,104 @@
+
+{{>user-partials/userHeader}}
+  <!DOCTYPE html>
+<html>
+
+<style>
+
+    .text-center {
+        padding-top: 2px;
+  text-align: center;
+  color:beige;
+}
+
+</style>
+<head>
+    <!-- Add your CSS and other head elements here -->
+</head>
+
+<body>
+        <div>
+            <h2 class="content-title card-title" style="text-align: center; padding-top:10px"> Wallet  Transaction </h2>
+                   
+                </div>
+                {{!-- <div>
+                    <input type="text" placeholder="Search order ID" class="form-control bg-white">
+                </div> --}}
+            </div>
+    <main class="main text-center" style="margin-top: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="dashboard-menu">
+                        <!-- Your sidebar content -->
+                        <ul class="nav flex-column" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link " id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab"
+                                    aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="/oderList" role="tab" aria-controls="orders" aria-selected="true"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a  href="/my-address"aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>Shipping Address</a>
+                            </li>
+                            <li class="nav-item">
+                                <a  href="/user-account-details" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
+                            </li>
+                             <li class="nav-item">
+                                 <a class="nav-link  active" id="account-detail-tab"  href="/walletTransaction"  aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Wallet History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sl NO</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Type</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each wallet}}
+                            <tr>
+                                <td>{{slno @index}}</td>
+                                <td>{{formatStandardTime this.WalletTransaction.date}}</td>
+                                <td>{{this.WalletTransaction.amount}}</td>
+                                {{#if (eq this.WalletTransaction.type 'Credit')}}
+                                <td><span class="label label-success">{{this.WalletTransaction.type}}</span></td>
+                                {{else}}
+                                <td><span class="label label-danger">{{this.WalletTransaction.type}}</span></td>
+                                {{/if}}
+                              
+                            </tr>
+                            {{/each}}
+                        
+                            <!-- Add your table rows here -->
+                        </tbody>
+                    </table>
+                    <br>
+                    <h5 style="margin-left: 460px;">Balance Amount:{{amount.Wallet}}</h5>
+                
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add your JavaScript and other body elements here -->
+</body>
+
+<div style="padding-top:200px">
+
+</div>
+
+
+{{>user-partials/userFooter}} 

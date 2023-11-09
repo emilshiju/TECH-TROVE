@@ -1,0 +1,193 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+<style>
+  .alert {
+    font-size: medium;
+  }
+
+  .close {
+    font-size: 20px; 
+  }
+</style>
+        <section class="content-main ">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Categories </h2>
+                    <p>Add, edit or delete a category</p>
+                </div>
+                
+                 {{!-- <div style="display: none;" id="alertCategory" class=" alert alert-success alert-dismissible fade show" role="alert">
+                    <div id="printAlertCategory">
+
+                    </div>
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+             --}}
+
+                <div>
+                    <input type="text" placeholder="Search Categories" class="form-control bg-white ">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body  bg-light">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form  id="categoryForm"  onsubmit="return formSubmit(event)">
+                                <div class="mb-4">
+                                    <label class="form-label">Name</label>
+                                    <input type="text"  id="title"  name="title" onkeyup="Validatetitle()"  placeholder="Type here" class="form-control" >
+                                    <span id="titleError"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label"> Max Discount (Rs)</label>
+                                    <input type="number" id="maxDiscountValue" name="offer"   class="form-control">
+                                    <span id="maxDiscountValueError"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Description</label>
+                                    <textarea placeholder="Type here" name="description" onkeyup="Validatedescription()" id="description"  class="form-control" ></textarea>
+                                    <span id="descriptionError"></span>
+                                </div>
+                                {{#if exists}}
+                                <span>{{exists}}</span>
+                                {{/if}}
+                                <div class="d-grid">
+                                    <button class="btn btn-primary"  >Create category</button>
+                                </div>
+                            </form>
+                        </div>
+                            </div>
+                        </div> <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+      
+        {{>admin-partials/adminFooter}}
+    </main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+
+
+function Validatetitle(){
+
+const title=document.getElementById('title').value
+const titleError=document.getElementById('titleError')
+
+if(title.trim().length===0){
+    titleError.innerHTML='feild is empty'
+    titleError.style.color='red'
+    return false
+}
+titleError.innerHTML=''
+return true
+
+}
+
+
+function maxdiscountValidation(){
+
+    let maxDiscount=document.getElementById('maxDiscountValue')
+    let maxDiscountValueError=document.getElementById('maxDiscountValueError')
+
+     let maxDiscountValue=maxDiscount.value
+
+
+    if(maxDiscountValue.trim()==0){
+        maxDiscountValueError.innerHTML='feild is required'
+        maxDiscountValueError.style.color='red'
+        return false
+    }
+
+    if(maxDiscountValue<=0){
+        maxDiscountValueError.innerHTML='require greather than zero'
+        maxDiscountValueError.style.color='red'
+        return false
+    }
+
+    maxDiscountValueError.innerHTML=''
+    return true
+
+}
+
+
+
+function  Validatedescription (){
+
+const description=document.getElementById('description').value
+const descriptionError=document.getElementById('descriptionError')
+
+if(description.trim().length===0){
+    descriptionError.innerHTML='feild is empty'
+    descriptionError.style.color='red'
+    return false
+}
+descriptionError.innerHTML=''
+return true
+}
+
+
+function formSubmit(event){
+     event.preventDefault()
+    
+
+
+
+     if(Validatetitle()&&Validatedescription()){
+const title=document.getElementById('title').value
+
+const description=document.getElementById('description').value
+
+const offer=document.getElementById('offer').value
+         $.ajax({
+        type:'POST',
+        url:'/addCategory',
+        data:{
+            title:title,
+            description:description,
+        },
+        success:function(response){
+            console.log("yeh",response.status)
+  
+            if(response.status){
+                Swal.fire(response.message)
+         
+            }else{
+                   Swal.fire(response.message)
+             
+            }
+             
+        $('#categoryForm')[0].reset()
+        },
+        error:function(error){
+            console.log(error)
+        }
+    })
+     }else{
+        return false
+     }
+
+}
+  
+</script>
+
+
+
+
+
+</body>
+
+
+
+
+

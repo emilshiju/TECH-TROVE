@@ -1,0 +1,224 @@
+
+<style>
+    span{
+        margin-left: 13px !important;
+        font-size: 13px;
+        font-family: Arial, sans-serif;
+        color: red;
+    }
+</style>
+
+<div class="content-main d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="login_wrap widget-taber-content p-20 background-white border-radius-10 shadow-lg">
+                    <div class="padding_eight_all bg-white">
+                        <div class="heading_s1">
+                            <h3 class="mb-20">Create an Account</h3>
+                        </div>
+                      
+                        <form id="form"  onsubmit="return submitForm(event)" action="/register" method="post">
+                            
+                            <div class="form-group">
+                           <div class="input-group">
+                               <input type="text" id="fname"  name="firstName" onkeyup="fnameValidation()" placeholder="First Name" style="margin-left: 10px;"  value="">
+                               <span id="fnameError" style="display: block;"></span>
+                            </div>
+                         <br> 
+                         
+                         <div class="input-group">
+                         <input type="text"  id="lname"  name="lastName" placeholder="Last Name" onkeyup="lnameValidation()" style="margin-left: 10px;">
+                         <span id="lnameError"></span>
+                         
+                         </div>
+                         <br>
+                            <div class="input-group">
+                                <input type="text" id="email"  name="email" placeholder="Email" onkeyup="emailValidation()" style="margin-left: 10px;" >
+                                <span id="emailError"></span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="text" id="phone"  name="phone" placeholder="phone" onkeyup="phoneValidation()" style="margin-left: 10px;" >
+                                <span id="phoneError"></span>
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <input type="password"  id="password"  name="password" placeholder="Password" onkeyup="passwordValidation()">
+                                <span id="passwordError"></span>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <input  type="password" class="form-control form-control-sm" name="confpassword"  onkeyup="passwordValidation()"  placeholder="Confirm password">
+                            </div>
+                            <span id="passwordError"></span>
+                            <div class="login_footer form-group">
+                                <div class="custom-control custom-checkbox" >
+                                    {{#if message}}
+                                    <span  id="servererror" onkeyup="serverErrorMessage()">{{message}}</span>
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-sm">Register</button>
+                            </div>
+                        </form>
+                        <div class="divider-text-center mt-15 mb-15">
+                            <span>or</span>
+                        </div>
+                        <ul class="btn-login list_none text-center mb-15">
+                            <li><a href="#" class="btn btn-facebook btn-sm mb-lg-0 mb-sm-4">Login With Facebook</a></li>
+                            <li><a href="#" class="btn btn-google btn-sm">Login With Google</a></li>
+                        </ul>
+                        <div class="text-muted text-center">Already have an account? <a href="#">Sign in now</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    function serverErrorMessage(){
+       const servererror= document.getElementById('servererror')
+       if(servererror){
+       setTimeout(()=>{
+        servererror.textContent=''
+       },2000)
+    }
+    }
+ setTimeout(serverErrorMessage);
+</script>
+
+<script>
+
+
+const form=document.getElementById('form')
+const fname=document.getElementById('fname')
+const lname=document.getElementById('lname')
+const email=document.getElementById('email')
+const password=document.getElementById('password')
+
+const fnameError=document.getElementById('fnameError')
+const lnameError=document.getElementById('lnameError')
+const emailError=document.getElementById('emailError')
+const passwordError=document.getElementById('passwordError')
+
+const nameRegex = /^[A-Za-z]+$/; 
+
+function fnameValidation(){
+    const fnameValue=fname.value
+
+    if(fnameValue.trim().length ===0){
+        fnameError.innerHTML='field is required',
+        fnameError.style.color='red'
+        return false
+    }
+    if(!fnameValue.match(nameRegex)){
+        fnameError.innerHTML='enter valid field',
+        fnameError.style.color='red'
+        return false
+    }
+    fnameError.innerHTML = ""
+    return true
+}
+
+
+function lnameValidation(){
+    const lnameValue=lname.value
+     if(lnameValue.trim().length ===0){
+        lnameError.innerHTML='field is required',
+        lnameError.style.color='red'
+        return false
+     }
+     if(!lnameValue.match(nameRegex)){
+        lnameError.innerHTML='enter valid field'
+        lnameError.style.color='red'
+        return false
+     }
+     lnameError.innerHTML=""
+     return true
+}
+
+
+function emailValidation() {
+    const emailValue = email.value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailValue.trim().length === 0) {
+        emailError.innerHTML = 'Email field is required';
+        emailError.style.color = 'red';
+        return false;
+    }
+    if (!emailValue.match(emailRegex)) {
+        emailError.innerHTML = 'Enter a valid email address';
+        emailError.style.color = 'red';
+        return false;
+    }
+    emailError.innerHTML = '';  // Clear the error message when it's valid
+    return true;
+}
+
+function passwordValidation() {
+    const passwordValue = password.value;
+    const passwordError = document.getElementById('passwordError');  // Assuming you have an element with id 'passwordError'
+    passwordError.innerHTML = '';  // Clear any existing error message
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    if (passwordValue.trim().length === 0) {
+        passwordError.innerHTML = 'Password field is required';
+        passwordError.style.color = 'red';
+        return false;
+    }
+
+    if (!passwordValue.match(passwordRegex)) {
+        passwordError.innerHTML = 'Password should contain at least 8 characters, 1 number, and 1 special character';
+        passwordError.style.color = 'red';
+        return false;
+    }
+
+    // Clear the error message when it's valid
+    passwordError.innerHTML = '';
+    return true;
+}
+function phoneValidation(){
+
+    const phone=document.getElementById('phone').value
+    // const phoneRegex=/^[6-9]\d{9}$/
+         const phoneRegex=/^(?!0+$)[6-9]\d{9}$/
+
+     const phoneError=document.getElementById('phoneError')
+
+        if(phone.trim().length ===0){
+            phoneError.innerHTML='phone number is requried'
+            phoneError.style.color='red'
+            return false
+        }
+        if(!phone.match(phoneRegex)){
+            phoneError.innerHTML='check the field'
+            phoneError.style.color='red'
+            return false
+        }
+        phoneError.innerHTML=''
+        return true
+     }
+
+
+function submitForm(event){
+    event.preventDefault()
+
+    if(!fnameValidation()||!lnameValidation()||!emailValidation()||!passwordValidation()||!phoneValidation()){
+
+        return false
+    }else{
+        form.submit()
+        return true
+    }
+} 
+
+
+</script>

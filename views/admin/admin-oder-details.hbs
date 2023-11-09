@@ -1,0 +1,143 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+  
+   
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Order detail</h2>
+                    <p>Details for Order ID: 3453012</p>
+                </div>
+            </div>
+            <div class="card">
+                <header class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6 mb-lg-0 mb-15">
+                            <span>
+                                {{#each order}}
+                                <i class="material-icons md-calendar_today"></i> <b>{{formatStandardTime this.createdAt}}</b>
+                               
+                            </span> <br>
+                            <small class="text-muted">Order ID:{{this._id}}</small>
+                             {{/each}}
+                        </div>
+                        <div class="col-lg-6 col-md-6 ms-auto text-md-end">
+                           
+                            <a class="btn btn-primary" href="#">Print</a>
+                            <a class="btn btn-secondary print ms-2" href="#"><i class="icon material-icons md-print"></i></a>
+                        </div>
+                    </div>
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="row mb-50 mt-20 order-info-wrap">
+                        <div class="col-md-4">
+                            <article class="icontext align-items-start">
+                                <span class="icon icon-sm rounded-circle bg-primary-light">
+                                    <i class="text-primary material-icons md-person"></i>
+                                </span>
+                          
+                                <div class="text">
+                                        
+                                    <h6 class="mb-1">Customer</h6>
+                                    <p class="mb-1">
+                                     {{userDetails.firstName}}<br>{{userDetails.email}}<br>{{userDetails.mobile}}
+                                    </p>
+                                    <a href="#">View profile</a>
+                                     
+                                </div>
+                           
+                            </article>
+                        </div> <!-- col// -->
+                        <div class="col-md-4">
+                            <article class="icontext align-items-start">
+                                <span class="icon icon-sm rounded-circle bg-primary-light">
+                                    <i class="text-primary material-icons md-local_shipping"></i>
+                                </span>
+                                
+                                <div class="text">
+                                    {{#each order}}
+                                    <h6 class="mb-1">Order info</h6>
+                                    <p class="mb-1">
+                                        Shipping: Fargo express <br> Pay method:{{this.paymentMethod}}<br> Status: new
+                                    </p>
+                                    <a href="#">Download info</a>
+                                    {{/each}}
+                                </div>
+                                
+                            </article>
+                        </div> <!-- col// -->
+                        <div class="col-md-4">
+                            <article class="icontext align-items-start">
+                                <span class="icon icon-sm rounded-circle bg-primary-light">
+                                    <i class="text-primary material-icons md-place"></i>
+                                </span>
+                              
+                                <div class="text">
+                                    <h6 class="mb-1">Deliver to</h6>
+                                    
+                                     <p class="mb-1">
+                                        City:{{address.item.city}}<br>{{address.item.address}}<br>
+                                        Locality:{{address.item.locality}}<br>
+                                        Pincode:{{address.item.pincode}}<br>
+                                        State:{{address.item.state}}
+                                    </p>
+                                    <a href="#">View profile</a>
+                                </div>
+                          
+                            </article>
+                        </div> <!-- col// -->
+                    </div> <!-- row // -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                         <tr>
+                                            <th width="40%">Product</th>
+                                            <th width="10%">Unit Price</th>
+                                            <th width="10%">Quantity</th>
+                                            <th width="10%">Status</th>
+                                            <th width="10%">Payment Method</th>
+                                            {{#each order}}
+                                            {{#if reason}}
+                                            <th width="20%">Reason</th>
+                                            {{/if}}
+                                            {{/each}}
+                                            <th width="20%" class="text-end">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each product}}
+                                          <tr>
+                                        <td>{{this.productName}}
+                                            <img src="{{getFirstImageUrl  this.image}}" alt="">
+                                        </td>
+                                         <td>{{this.productPrice}}</td>
+                                         <td>{{this.quantity}}</td>
+                                          {{#each ../order}}
+                                         <td>{{oderstatus}}</td>
+                                         <td>{{paymentMethod}}</td>
+                                         {{#if reason}}
+                                         <td>{{reason}}</td>
+                                         {{/if}}
+                                         {{/each}}
+                                          <td class="text-end">{{oderListTotal this.productPrice  this.quantity}}</td>
+                                          
+                                           </tr>
+                                           {{/each}}
+                                    </tbody>
+                                    
+                                </table>
+                            </div> <!-- table-responsive// -->
+                            <a class="btn btn-primary" href="page-orders-tracking.html">View Order Tracking</a>
+                        </div> <!-- col// -->
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-4">
+                           
+                          
+                        </div> <!-- col// -->
+                    </div>
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+        </section> <!-- content-main end// -->
+      

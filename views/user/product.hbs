@@ -1,0 +1,355 @@
+
+ 
+ <style>
+  /* Define styles for the button */
+  .btn-success {
+    padding: 8px 40px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    color: #fff;
+    background-color: #28a745; /* Green color for success */
+    border-radius: 5px;
+    cursor: pointer;
+/* Adjust line-height to vertically center the text */
+  }
+
+  /* Styles for hover effect */
+  .btn-success:hover {
+    background-color: #218838; /* Darker green on hover */
+  }
+
+
+  .rating-box {
+  width: 20px; /* Adjust the width as needed */
+  display: flex;
+  justify-content: space-between;
+}
+
+.fas.fa-star {
+  font-size: 18px; /* Adjust the font size to control the size of the stars */
+  color:rgb(210, 126, 23)
+
+}
+</style>
+
+
+
+
+
+
+ {{>user-partials/userHeader}}
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/" rel="nofollow">Home</a>
+                    <span>></span>
+                </div>
+                  <div class="breadcrumb">
+                    <a href="/shop" rel="nofollow">Shop</a>
+                   
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-detail accordion-detail">
+                            <div class="row mb-50">
+                                  {{!-- <span class="zoom-icon"><i class="fa-regular fa-heart" style="font-size: 27px;padding-left:520px" ></i></span> --}}
+                                 <div class="col-md-5 col-sm-12 col-xs-12">
+                                    <div class="detail-gallery">
+                                      
+                                        <div class="wd-wishlist-btn">
+
+                                        </div>
+                                        <!-- MAIN SLIDES -->
+                                            {{!-- <i class="fa-regular fa-heart"></i> --}}
+
+                                        <div class="product-image-slider">
+                                            <figure class="border-radius-10" >
+                                                <img src="{{getFirstImageUrl Product.images}}"style="width: 800px;height:700px;" alt="product image">
+                                            </figure>
+                                            <figure class="border-radius-10" >
+                                                <img src="{{getFirstImageUrl1 Product.images}}"style="width: 800px;height:700px;" alt="product image">
+                                            </figure>
+                                            <figure class="border-radius-10">
+                                                <img src="{{getFirstImageUrl2 Product.images}}"style="width: 700px;height:700px;" alt="product image">
+                                            </figure>
+                                            
+                                            <figure class="border-radius-10">
+                                                <img src="assets/imgs/shop/product-16-7.jpg" alt="product image">
+                                            </figure>
+                                        </div>
+                                        <!-- THUMBNAILS -->
+                                        <div class="slider-nav-thumbnails pl-15 pr-15">
+                                          
+                                            
+                                            <div><img src="{{getFirstImageUrl Product.images}}" alt="product image"></div>
+                                            <div><img src="{{getFirstImageUrl1 Product.images}}" alt="product image"></div>
+                                            <div><img  src="{{getFirstImageUrl2 Product.images}}" alt="product image"></div>
+                                           
+                                            {{!-- <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image"></div> --}}
+                                        </div>
+                                    </div>
+                                    <!-- End Gallery -->
+                                </div>
+                     
+                                 
+                                  
+
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="detail-info">
+                                        <h2 class="title-detail" style="margin-top: 100px;">{{Product.name}}</h2>
+                                        <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                        <h5 style="padding-top: 20px;">AMOUNT:{{formatNumber Product.price}}</h5>
+                                        <div class="short-desc mb-30" style="margin-top: 30px;">
+                                            <p>{{Product.description}}</p>
+                                        </div>
+                                        <div class="product_sort_info font-xs mb-30">
+                                            <ul>
+                                                <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
+                                                <li class="mb-10"><i class="fi-rs-refresh mr-5"></i> 30 Day Return Policy</li>
+                                                <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
+                                            </ul>
+                                        </div>
+                                        {{!-- productId --}}
+                                       <input type="hidden" id="PRODUCTID" value="{{Product._id}}">
+                                        
+                                        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                                        <div class="detail-extralink">
+                                            {{!-- <div class="detail-qty border radius">
+                                            <span style="font-size: 16px;" id="value">1</span>
+                                             <span id="uparrow"><i class="fa-solid fa-arrow-up" style="font-size: 14px;"></i></span>
+                                             <span id="downarrow"><i class="fa-solid fa-arrow-down" style="font-size: 14px;"></i></span>
+                                            </div> --}}
+                                            <div class="product-extra-link2">
+                                                {{#if existingCartItem}}
+                                             <button  onclick="window.location.href='/getCart'"  class="button button-add-to-cart">Go to cart</button>
+                                                {{else}}
+                                                <button   class="button button-add-to-cart" onclick="submit('{{Product._id}}')">Add to cart</button>
+                                                {{/if}}
+                                                <button     onclick="directBuy('{{Product._id}}')"   class="button button-add-to-cart">Buy Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                                       <div class="comments-area">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        {{#if (or users.rating notUser.rating )}}
+                                        <h4 class="mb-30">Comments</h4>
+                                        {{else}}
+                                        {{/if}}
+                                        <div class="comment-list">
+                                            <div class="single-comment justify-content-between d-flex">
+                                                <div class="user justify-content-between d-flex">
+                                                      <div class="rating-box" id="ratingStars" style="padding-left: 20px;">
+    
+                                                          </div>
+                                                          <br>
+                                                        
+                                                    <div class="desc">
+                                                         {{#each users}}
+                                                        <br>
+                                                        <p>{{review}}</p>
+                                                        
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="font-xs mr-30">{{formatStandardTime createdAt}}</p>
+                                                                
+                                                            </div>
+                                                             {{!-- <td class="action" data-title="Remove" onclick="deleteReview('{{this._id}}')"> --}}
+                                                                   <a  class="text-muted" onclick="deleteReview('{{this._id}}')" ><i class="fi-rs-trash"></i></a>
+                                                             {{!-- </td> --}}
+                                                        </div>
+                                                          {{/each}}
+                                                    </div>
+                                                  
+                                                       
+                                                    <div class="desc">
+                                                        {{#each notUser}}
+                                                        <div class="product-rate d-inline-block">
+                                                            <div class="product-rating" style="width:90%">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+                                                         <p>{{review}}</p>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="font-xs mr-30">{{formatStandardTime createdAt}}</p>
+                                                            </div>
+                                                        </div>
+                                                          {{/each}}
+                                                    </div>
+
+                                                      <div class="desc">
+                                                         {{#each allUsers.rating}}
+                                                        <br>
+                                                        <p>{{review}}</p>
+                                                        
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="font-xs mr-30">{{formatStandardTime createdAt}}</p>
+                                                                
+                                                            </div>
+                                                             {{!-- <td class="action" data-title="Remove" onclick="deleteReview('{{this._id}}')"> --}}
+                                                                   {{!-- <a  class="text-muted" onclick="deleteReview('{{this._id}}')" ><i class="fi-rs-trash"></i></a> --}}
+                                                             {{!-- </td> --}}
+                                                        </div>
+                                                          {{/each}}
+                                                    </div>
+
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <a href="/get-rate-Product/{{Product._id}}" class="btn btn-primary">Post Comment</a>   
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            
+              {{>user-partials/userFooter}}
+
+
+<style>
+    .custom-popup-class {
+  max-height: 60vh; /* Adjust the maximum height as needed */
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+
+        let rating={{{cappedOverallRating}}}
+        const ratingStar=document.getElementById('ratingStars')
+        ratingStar.innerHTML=''
+        for(let i=0;i<rating;i++){
+            const star=document.createElement('i');
+            star.className='fas fa-star active';
+            ratingStar.append(star)
+
+        }
+
+{{!-- 
+const value=document.getElementById('value')
+const uparrow=document.getElementById('uparrow')
+const downarrow=document.getElementById('downarrow')
+
+uparrow.addEventListener('click',()=>{
+    if(value.innerHTML<8) value.innerHTML++
+    else Swal.fire('maximin allowted only 10')
+})
+downarrow.addEventListener('click',()=>{
+    if(value.innerHTML>=1) value.innerHTML--
+}) --}}
+
+
+
+
+function submit(productId){
+   
+        $.ajax({
+            type:'POST',
+            url:'/cartadd/'+productId,
+            success:function(response){
+               
+                if(response.success){
+                   
+                    
+                    
+                    Swal.fire(response.message)
+                    .then(()=>{
+                        window.location.href='/getCart'
+                          //window.location.href='/singleProduct?id='+productId
+                    })
+                }else{
+                    Swal.fire(response.message)
+                }
+            },
+            error:function(error){
+                  Swal.fire('error')
+            }
+        })
+    }
+
+// Log currentValue
+// Select the element and retrieve its text (which is the value)
+
+
+</script>
+
+
+<script>
+
+    function directBuy(productId){
+
+    $.ajax({
+        type:'get',
+        url:'/direct-Buy/'+productId,
+        success:function(response){
+            if(response.success){
+                   window.location.href=`/oder-direct-buy?id=${productId}`
+            }else{
+                   Swal.fire(response.message)
+            }
+        },
+         error:function(error){
+                  Swal.fire('error')
+            }
+        
+    })
+
+    }
+</script>
+
+
+<script>
+
+let Id=document.getElementById('PRODUCTID')
+console.log("0000000000000000000000000000000000000000000000000000000000000000000000000")
+
+
+
+    function deleteReview(reviewId){
+     
+        let ProductId=Id.value
+         Swal.fire({
+            title:"Are you sure?",
+            text:'Once deleted, you cannot recover this review!',
+            icon:"Warning",
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel',
+         }).then((result)=>{
+            if(result.isConfirmed){
+                  $.ajax({
+                 url:'/delete-review',
+                 type:'Delete',
+                 data:{
+                     productId:ProductId,
+                     reviewId:reviewId
+                  },
+                   success:(response)=>{
+                   Swal.fire(response.message)
+                  }
+               })
+            }
+         })
+      
+    }
+</script>

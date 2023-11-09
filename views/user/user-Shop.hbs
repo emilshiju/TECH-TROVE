@@ -1,0 +1,254 @@
+﻿
+{{>user-partials/userHeader}}
+
+<style>
+ .product-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fit-to-screen {
+    max-width: 100%;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+}
+.card-1 {
+    display: inline-block; /* Display in a line */
+    margin-right: 15px; /* Add some spacing between cards */
+}
+  </style>
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/" rel="nofollow">Home</a>
+                    <span></span> Shop
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row flex-row-reverse">
+                    <div class="col-lg-9">
+                        <div class="shop-product-fillter">
+                            <div class="totall-product">
+                                <p> We found <strong class="text-brand">{{count}}</strong> items for you!</p>
+                            </div>
+                            <div class="sort-by-product-area">
+                                
+                                <div class="sort-by-cover">
+                                    <div class="sort-by-product-wrap">
+                                        <div class="sort-by">
+                                            <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
+                                        </div>
+                                        <div class="sort-by-dropdown-wrap">
+                                            <span> Featured <i class="fi-rs-angle-small-down"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="sort-by-dropdown">
+                                        <ul>
+                                            <li><a class="active" href="#">Featured</a></li>
+                                            <li><a href="/shop?sort=price_asc">Price: Low to High</a></li>
+                                            <li><a href="/shop?sort=price_desc">Price: High to Low</a></li>
+                                            {{!-- <li><a href="#">Release Date</a></li>
+                                            <li><a href="#">Avg. Rating</a></li> --}}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                             
+<div class="container">
+    <div class="row product-grid-3">
+        {{#each products}}
+        <div class="col-lg-4 col-md-4 col-12 col-sm-6">
+            <div class="product-cart-wrap mb-30">
+                <div class="product-img-action-wrap">
+                    <div class="product-img product-img-zoom">
+                        <a href="/singleProduct?id={{this._id}}">
+                            <img class="default-img" src="{{getFirstImageUrl this.images}}" alt="" style="max-height: 230px; max-width: 100%;" class="fit-to-screen">
+                            <img class="hover-img" src={{getFirstImageUrl this.images}} alt="">
+                        </a>
+                    </div>
+                       <div class="product-action-1">
+                                <a aria-label="Quick view" class="action-btn hover-up" href="/singleProduct?id={{this._id}}" ><i class="fi-rs-eye"></i></a>
+                                {{#if (wishlistCheck  ../wishListProduct this._id) }}
+                                        <a href="/get-wish-list"><i class="fa-solid fa-heart" style="color: red; font-size:24px"></i></a>
+                                            
+                                {{else}}
+                                        <a  onclick="addToWishList('{{this._id}}')" aria-label="Add To Wishlist" > <i class="fa-solid fa-heart" style="color:aliceblue; font-size:24px"></i></a>
+                                            
+                                {{/if}}
+                                            
+                        </div>
+                   
+                </div>
+                <div class="product-content-wrap">
+                    <div class="product-category">
+                        <a href="shop-grid-right.html">Music</a>
+                    </div>
+                    <h2><a href="shop-product-right.html">Cartoon Astronaut T-Shirts</a></h2>
+                    <div class="rating-result" title="90%">
+                        <span>
+                            <span>50%</span>
+                        </span>
+                    </div>
+                    <div class="product-price">
+                        <span>{{formatNumber  this.price}}</span>
+                    </div>
+                    <span>Offer Percentage</span>
+                    <span>{{this.offer}}</span>
+                    
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+                        <!--pagination-->
+                        <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    {{#if (gt currentPage 1)}}
+                                    <a href="/shop?page={{substract currentPage 1}}"></a>
+                                      <li class="page-item"><a class="page-link" href="/shop?page={{substract currentPage 1}}"><i class="fi-rs-angle-double-small-left"></i></a></li>
+                                      {{/if }}
+                                    {{#each (range 1 totalPages) as |pageNumber index| }}
+                                    {{#if (eq pageNumber currentPage)}}
+                                    <li class="page-item  active"><a class="page-link" href="/shop?page={{this}}">{{this}}</a></li>
+                                    {{else}}
+                                   <li class="page-item "><a class="page-link" href="/shop?page={{this}}">{{this}}</a></li>
+                                    {{/if}}
+                                    {{/each}}
+                                    {{#if (lt currentPage totalPages)}}
+                                    
+                                     <li class="page-item"><a class="page-link" href="/shop?page={{add currentPage}}"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                                      </a>
+                                     {{/if}}
+                                    {{!-- <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li> --}}
+                                </ul>
+                            </nav>
+                        </div> 
+                        
+                    </div>
+                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                        <div class="widget-category mb-30">
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                            {{#each Category}}
+                            <ul class="categories">
+                                <li><a href="/categoryShop?id={{this._id}}">{{this.title}}</a></li>
+                            </ul>
+                            {{/each}}
+                        </div>
+                        <!-- Fillter By Price -->
+                     
+                        <form  id="filterForm"  method="get">        
+                         <div>
+                        <h5 class="widget-title mb-10">Fill by price</h5>
+                              <div class="price-filter-inner">
+                                    <div id="slider-range"></div>
+                                    <div class="price_slider_amount">
+                                        <div class="label-input">
+                                            <span>Range:</span><input type="text" id="amount"  placeholder="Add Your Price"></input>                                        </div>
+                                    </div>
+                                </div> 
+                                  <input class="form-check-input" type="checkbox" name="checkbox" value="1" id="checkbox1" value="">
+                                <label class="form-check-label" for="exampleCheckbox1">' '<span style="padding-left: 10px;">Low to High</span></label>
+                                    <br>
+                                <input class="form-check-input" type="checkbox" name="checkbox"  value="2"id="checkbox2" value="">
+                                <label class="form-check-label" for="exampleCheckbox2">' '<span style="padding-left: 10px;">  High to low</span></label>
+                                        <br>
+                          
+                   
+                            <div class="list-group">
+                          
+                            </div>
+                            <br>
+                         <button  type="button"  onclick="applyFilter()"   class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</button>
+                       </div> 
+                      </form>
+
+                        
+                        <br>
+
+                        {{!-- <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
+                            <img src="assets/imgs/banner/banner-11.jpg" alt="">
+                            <div class="banner-text">
+                                <span>Women Zone</span>
+                                <h4>Save 17% on <br>Office Dress</h4>
+                                <a href="shop-grid-right.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+   {{>user-partials/userFooter}} 
+
+
+
+<script>
+    function applyFilter() {
+  // Get the selected price range from the slider
+// Get the current value from the input with ID "amount"
+const amountValue = document.getElementById('amount').value;
+
+const checkbox1=document.getElementById('checkbox1')
+const checkbox2=document.getElementById('checkbox2')
+  
+  const oder=[]
+if(checkbox1.checked){
+    const value=checkbox1.value
+    oder.push('price_asc')
+   
+}else{
+    const value=checkbox2.value
+    oder.push('price_desc')
+  
+}
+console.log(oder)
+// Log the current value to the console
+
+const [minPrice, maxPrice] = amountValue.split('-').map(value => parseFloat(value.replace(/\s|\$/g, '')));
+console.log(minPrice)
+console.log(maxPrice)
+
+const url=`/shop?minPrice=${minPrice}&maxPrice=${maxPrice}&sort=${oder}`
+console.log(url)
+window.location.href=url
+
+}
+
+</script>
+
+ <script>
+
+function addToWishList(ProId){
+    alert(ProId)
+    event.preventDefault()
+    $.ajax({
+        url:"/add-to-Wishlist",
+        method:"POST",
+        data:{
+            ProId:ProId
+        },
+        success:(response)=>{
+            if(response.status === false){
+                Swal.fire(response.message)
+            }else if(response.status === true){
+                Swal.fire(response.message)
+            }
+        }
+        
+    })
+
+
+}
+    
+    </script>

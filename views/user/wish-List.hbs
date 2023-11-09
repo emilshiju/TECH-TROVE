@@ -1,0 +1,140 @@
+{{>user-partials/userHeader}}
+
+<body>
+    <link rel="stylesheet" href="assets/css/main.css?v=3.4">
+
+    <main class="main">
+        <div class="page-header breadcrumb-wrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <a href="/" rel="nofollow">Home</a>
+                    
+                </div>
+                <div class="breadcrumb">
+                   
+                    <a href="/shop">Shop</a>
+                </div>
+            </div>
+        </div>
+        <section class="mt-50 mb-50">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table shopping-summery text-center">
+                                <thead>
+                                    <tr class="main-heading">
+                                        <th scope="col" colspan="2">Product</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Stock Status</th>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                    {{#each getWishList}}
+                                    <tr>
+                                        <td class="image product-thumbnail"><img src="{{getFirstImageUrl this.wishListed.images}}" alt="#"></td>
+                                        <td class="product-des product-name">
+                                            {{#if (wishListcheckUnavilable this)}}
+                                            <h5 class="product-name"><a href="shop-product-right.html">{{this.wishListed.name}}</a></h5>
+                                            {{!-- <p class="font-xs">hoihoo joioijuoioio oijoip0<br> distingy magndapibus. --}}
+                                            </p>
+                                            {{else}}
+                                            <span>Unavilable</span>
+                                            {{/if}}
+                                        </td>
+                                        <td class="price" data-title="Price"><span>{{this.wishListed.price}}</span></td>
+                                        <td class="text-center" data-title="Stock">
+                                            <span class="color3 font-weight-bold">{{this.wishListed.stock}}</span>
+                                        </td>
+                                        <td class="text-center" data-title="Cart">
+                                              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+                                                 {{#if (wishListcheckUnavilable this)}}
+                                               <button class="btn btn-sm"  onclick="submit('{{this.productId}}')"><i class="fi-rs-shopping-bag mr-5"></i>Add to cart</button>
+                                               {{else}}
+                                                <span>Product Unavilable</span>
+                                               {{/if}}
+                                              </div>
+                                        </td>
+
+                                        <td class="action" data-title="Remove" onclick="removeFromWishList('{{this.productId}}')"><i class="fi-rs-trash"></i></td>
+                                    </tr>
+                                    {{/each}}
+                                    
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                        {{#if getWishList}}
+                                    {{else}}
+                                    <h2 style="padding-left: 500px;">Wishlist is empty</h2>
+                                    {{/if}}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{{>user-partials/userFooter}}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+function submit(productId){
+   
+        $.ajax({
+            type:'POST',
+            url:'/cartadd/'+productId,
+            success:function(response){
+               
+                if(response.success){
+                   
+                    
+                    
+                    Swal.fire(response.message)
+                    
+                   
+                }else{
+                    Swal.fire(response.message)
+                }
+            },
+            error:function(error){
+                  Swal.fire('error')
+            }
+        })
+    }
+
+  function removeFromWishList(proId){
+
+
+    Swal.fire({
+         title: "Are you sure you want to remove?",
+        showCancelButton: true, // This option enables the cancel button
+        confirmButtonText: "Yes, remove", // Text for the confirm (yes) button
+        cancelButtonText: "Cancel", 
+    }).then((result)=>{
+        if(result.isConfirmed){
+  $.ajax({
+        url:'/remove-product-wishlist',
+        method:'DELETE',
+        data:{
+            proId:proId
+        },
+        success:(response)=>{
+            Swal.fire(response.message)
+        }
+    })
+        }
+    })
+  
+
+  }
+
+
+
+
+</script>

@@ -1,0 +1,156 @@
+
+{{>admin-partials/adminSideBar}}
+<div class="main wrapper" >
+    <form   id="form" action="/edit-banner" onsubmit="return submitForm(event)" method="post" enctype="multipart/form-data" >
+    <section class="content-main">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-mb-4" style="margin-left:300px; margin-top:50px">
+                    <div class="card-header">
+                        <h4>Edit  Banner</h4>
+                    </div>
+                    <br>
+                    <br>
+                       {{#if message}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+            <button type="button"    class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
+           
+                    <div class="card-body">
+                      {{#each currentBanner}}
+                            <div class="mb-4">
+                                <label for="name" class="form-label" >Banner Title</label>
+                                <input type="text" placeholder="Type here" class="form-control" value="{{this.title}}" id="title" name="title" onkeyup="titleValidation()">
+                               
+                                <span id="titleError"></span>
+                            </div>
+                             <div class="mb-4">
+                                <label for="name" class="form-label" >Description</label>
+                                <input type="link" placeholder="Type here" class="form-control" id="description"  value="{{this.link}}" name="link"  onkeyup="descriptionValidation()">
+                               
+                                <span id="descriptionError"></span>
+                            </div>
+                            <input type="hidden" name="bannerId" value="{{this._id}}">
+                            {{!-- <div class="mb-4">
+                                <label class="form-label">Full Description</label>
+                                <textarea placeholder="Type here" class="form-control" rows="4" id="description" name="description"></textarea>
+                                <span id="descriptionError"></span>
+                            </div> --}}
+                            
+                            
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-lg-4" style="margin-top: 100px;">
+                  {{#each currentBanner}}
+                    <img src="/assests/{{this.image}}" id="imgView"  style="width: 350px; height: 150px;"  alt="not found">
+                    <br>
+                    <br>
+               <input class="form-control" id="inputimage" name="image"   oninput="imageValidation(event)" type="file">
+                     <span id="inputimageError"></span>
+                {{/each}}
+                <br>
+                 <div class="mt-4 " style="padding-left: 20px;">
+                     <button type="submit" id="submit-btn"   class="btn btn-primary">Update</button>
+                </div>
+            </div>
+             
+        </div>
+    </section>
+    </form>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+ 
+
+
+
+
+
+<script>
+
+    const names=document.getElementById('title')
+    const description=document.getElementById('description')
+
+
+    const nameError=document.getElementById('titleError')
+    const descriptionError=document.getElementById('descriptionError')
+    
+
+ function titleValidation(){
+    const nameValue=names.value
+    if(nameValue.trim()==0){
+        nameError.innerHTML='title is required',
+        nameError.style.color='red'
+        return false
+    }
+    nameError.innerHTML=''
+    return true
+ }
+ function descriptionValidation(){
+    const descriptionValue=description.value
+    if(descriptionValue.trim()==0){
+        descriptionError.innerHTML='description is required'
+        descriptionError.style.color='red'
+        return false
+    }
+    descriptionError.innerHTML=''
+    return true
+ }
+
+ function imageValidation(event){
+
+    if(event&&event.target&&event.target.files[0]){
+        
+     document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+    
+
+
+  let inputImage=document.getElementById('inputimage')
+ 
+  let inputImageError=document.getElementById('inputimageError')
+  
+ if (inputImage.files.length > 0) {
+    inputImageError.innerHTML = ''; // Clear the error message
+    return true;
+  } else {
+    inputImageError.innerHTML = 'Input image is required';
+    inputImageError.style.color = 'red';
+    return false;
+  }
+
+
+ }
+
+
+
+</script>
+
+
+
+
+<script>
+
+ function submitForm(event){
+    event.preventDefault();
+
+
+        if((titleValidation()&&descriptionValidation()&&imageValidation())){
+            document.getElementById('form').submit()
+            return true;
+        }else{
+          
+            return false;
+        }
+    }
+
+</script>

@@ -1,0 +1,202 @@
+
+
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+     <section class="content-main">
+         
+            
+
+
+   <div class="text-center">
+
+      <button type="button" class="btn btn-secondary btn_print m-3" value="Download as Pdf"><i class="fas fa-file-pdf"></i> Download as PDF</button>
+  
+      <button type="button" class="btn btn-secondary btn_print m-3" onclick="export_data()" value="Export to excel"><i class="fas fa-file-excel"></i> Download as Excel</button>
+  
+    </div>
+    <br>
+    <br>
+    <br>
+    <div style="margin-top: -5em;">
+      <form action="/salesReport" method="POST" id="salesReport">
+  
+        <div><input type="date" name="startdate" id="startdate" placeholder="Start Date" class="flatpickr"></div>
+        <span id="date-error1" style="display: none; color: red;">Invalid Start Date</span>
+  
+        <div><input type="date" name="enddate" id="enddate" placeholder="End Date" class="flatpickr"></div>
+        <span id="date-error2" style="display: none; color: red;">Invalid End Date</span>
+        <br>
+  
+        <button class="btn-sm btn-info" type="submit" id="submit-button">Submit</button>
+  
+      </form>
+      <br>
+    
+    </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="container_content">
+                            <thead>
+                                <tr>
+                                  
+                                    <th scopr="col">OderId</th>
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">Item Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Payment Mode</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each details}}
+                              <tr>
+                                
+                                <td>{{this._id}}</td>
+                                <td>{{this.shippingAddress.item.name}}</td>
+                                
+                                <td>
+                                    {{#each this.productDetails}}
+                                    
+                                     {{this.productName}}  <span style="font-weight: bolder">x</span>{{this.quantity}}<br>
+                                    
+                                      {{/each}}
+                                
+                                    {{!-- <br> --}}
+                                   
+                                </td>
+                               
+                                <td>{{this.totalPrice}}</td>
+                                <td>{{this.paymentMethod}}</td>
+                                <td>{{formatStandardTime  this.createdAt}}</td>
+                                
+                              </tr>
+                              {{/each}}
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            
+           
+        </section> 
+       
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
+
+<script>
+ 
+
+// Calculate the date that is 20 days ago
+const twentyDaysAgo = new Date();
+twentyDaysAgo.setDate(twentyDaysAgo.getDate() - 20);
+
+// Initialize Flatpickr with the calculated minimum date
+flatpickr(".flatpickr", {
+    dateFormat: "Y-m-d",
+    minDate: twentyDaysAgo, // Use the calculated date
+    theme: "material_blue",
+    enableTime: false,
+    nextArrow: '<i class="fa fa-chevron-right"></i>',
+    prevArrow: '<i class="fa fa-chevron-left"></i>',
+});
+
+
+let startDate=document.getElementById('startdate')
+let endDate=document.getElementById('enddate')
+
+let error1=document.getElementById('date-error1')
+let error2=document.getElementById('date-error2')
+
+let submitButton=document.getElementById('submit-button')
+  // Disable submit button on page load
+  submitButton.disabled = true;
+
+startDate.addEventListener("input",validateDates)
+endDate.addEventListener("input",validateDates)
+
+function validateDates(){
+    const selectedStartDate=new Date(startDate.value)
+    const selectedEndDate=new Date(endDate.value)
+    const today=new Date()
+   
+    
+    if(selectedStartDate<today){
+        error1.style.display='none'
+    }else{
+        error1.style.display='inline'
+    }
+
+    if(selectedEndDate<=today&&selectedEndDate>=selectedStartDate){
+        error2.style.display='none'
+    }else{
+      error2.style.display='inline'
+    }
+
+    if(error1.style.display ==='inline'||error2.style.display ==='inline' || selectedEndDate<selectedStartDate){
+      submitButton.disabled=true
+    }else{
+      submitButton.disabled=false
+    }
+
+
+}
+
+$(document).ready(function ($){
+  $(document).on('click','.btn_print',function(event){
+    event.preventDefault();
+
+    var element=document.getElementById('container_content');
+    var randomNumber=Math.floor(Math.floor() * (10000000000 - 1))+1;
+    var otp={
+      margin:0,
+      filename:'salesReport'+randomNumber+ '.pdf',
+       html2canvas: { scale: 10 },
+         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+    }
+    html2pdf().set(otp).from(element).save()
+  })
+})
+
+
+function export_data(){
+  let data = document.getElementById('container_content');
+          var fp = XLSX.utils.table_to_book(data, { sheet: 'SalesReport' });
+          XLSX.write(fp, {
+              bookType: 'xlsx',
+              type: 'base64'
+          });
+     XLSX.writeFile(fp, 'test.xlsx');
+}
+
+
+</script>
+
+<style>
+
+   .btn_print {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .btn_print:hover {
+    background-color: #286090;
+    border-color: #204d74;
+    color: #fff;
+  }
+
+  .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+</style>

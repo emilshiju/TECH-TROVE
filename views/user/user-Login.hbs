@@ -1,0 +1,171 @@
+
+
+<div class="content-main d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container" style="max-width: 600px">
+        <div class="row">
+            <div class="col-lg-12 mx-auto text-center">
+                <div class="login_wrap widget-taber-content p-40 background-white border-radius-15 shadow-lg">
+                    <div class="padding_eight_all bg-white">
+                        <div class="text-center">
+                            <h2 class="mb-30">Login</h2>
+                        </div>
+                        <form method="post"  action="">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-lg" id="email" onkeyup="emailValidation()" name="email" placeholder="Your Email" >
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-lg"  name="password" placeholder=" enter Password  or otp">
+                            </div>
+                            <span id="emailError"></span>
+                            {{#if message}}
+                            <span  id="serverError"  onkeyup="serverErrorMessage()">{{message}}</span>
+                            {{/if}}
+                            <div class="login_footer form-group text-center">
+                                <div class="custom-control custom-checkbox">
+                                    {{!-- <input type="checkbox" class="custom-control-input" id="exampleCheckbox1" name="checkbox" value=""> --}}
+                                    <a class="text-primary" onclick="requestOtp()" id="request-btn" class="float-right">Request OTP</a>
+                                </div>
+                                {{!-- <a class="text-muted" href="/forgotPassword">Forgot password?</a> --}}
+                            </div>
+
+                             <p id="otp-counter" class="float-right mb-0">&nbsp;</p>
+                        <a class="text-primary" href="/resendOtp" id="resend-btn" class="float-right" hidden>Resend OTP</a>
+                        <div class="clearfix"></div>
+                      
+
+
+                         
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
+                            </div>
+                            <div class="new-user-section">
+                            <h5>New user? <a href="/register">Sign up here</a></h5>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.new-user-section {
+  text-align: center;
+  margin-top: 30px; 
+}
+
+.new-user-section h5 {
+  margin:0;
+  font-size: 16px;
+  color: #555;
+}
+
+.new-user-section a {
+  color: blue;
+  text-decoration: none;
+}
+
+.new-user-section a:hover {
+  text-decoration: underline;
+}
+
+</style>
+
+
+<script>
+function serverErrorMessage(){
+ const serverError=document.getElementById('serverError')
+ if(serverError){
+    setTimeout(()=>{
+        serverError.textContent=''
+    },1000)
+ }
+}
+setTimeout(serverErrorMessage)
+    
+</script>
+
+<script>
+ const email=document.getElementById('email')
+ const emailError=document.getElementById('emailError')
+    function emailValidation() {
+    const emailValue = email.value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailValue.trim().length === 0) {
+        emailError.innerHTML = 'Email field is required';
+        emailError.style.color = 'red';
+        return false;
+    }
+    if (!emailValue.match(emailRegex)) {
+        emailError.innerHTML = 'Enter a valid email address';
+        emailError.style.color = 'red';
+        return false;
+    }
+    emailError.innerHTML = '';  // Clear the error message when it's valid
+    return true;
+}
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+  
+    var $ = jQuery.noConflict();
+</script>
+<script>
+     
+function requestOtp(){
+    const email=document.getElementById('email').value
+    console.log(email)
+    if(emailValidation()){
+        requestAction()
+    $.ajax({
+        url:'/otpLogin',
+        method:'get',
+        data:{
+        email:email
+        },
+        success:(response)=>{
+           
+            console.log(response)
+        }
+    })
+    }else{
+        false
+    }
+}
+</script>
+
+
+<script>
+
+    function requestAction(){
+    
+    const requestBtn=document.getElementById('request-btn')
+     const otpCounter=document.getElementById('otp-counter')
+
+     const otpError=document.getElementById('otp-error')
+
+     let seconds=parseInt(localStorage.getItem('countDownSeconds'))||30
+
+     const updateCountDown =()=>{
+        if(seconds>0){
+            requestBtn.hidden=true
+            seconds--;
+            otpCounter.innerText=`redend otp in ${seconds}`
+            localStorage.setItem('countDownSeconds',seconds.toString())
+            setTimeout(updateCountDown,1000)
+        }else{
+            requestBtn.hidden=false
+             otpCounter.hidden=true
+               
+            localStorage.removeItem('countDownSeconds')
+        }
+     }
+     updateCountDown()
+    }
+
+
+</script>

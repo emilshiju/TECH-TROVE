@@ -1,0 +1,280 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+<style>
+  .alert {
+    font-size: medium;
+  }
+
+  .close {
+    font-size: 20px; 
+  }
+</style>
+<section class="content-main ">
+    <div class="content-header">
+        <div>
+            <h2 class="content-title card-title">Add a New Coupon</h2>
+        </div>
+             <div>
+             
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body bg-light">
+            <div class="row">
+                <div class="col-md-4"> <!-- Left Column -->
+                    <form >
+                        <div class="mb-4">
+                            <label class="form-label">Coupon Code</label>
+                            <input type="text" id="couponName" value="" onkeyup="couponNameValidation()" placeholder="Generate Coupon Code" class="form-control">
+                            <span id="couponNameError"></span>
+                            <br>
+                            <div class="d-grid">
+                              <button class="btn btn-primary"  onclick="generateCoupon(event)">Create Coupon Code</button>
+                            </div>
+                            
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Validity</label>
+                            <input type="date" name="" id="validity" cols="45"  oninput="validityValidation()"  rows="5" class="form-control">
+                            <span id="validityError"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Min Purchase</label>
+                            <input type="number" id="minAmount"   oninput="minPurchaseValidation()" class="form-control">
+                            <span id="minAmountError"></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4"> <!-- Right Column -->
+                    <div class="mb-4">
+                        <label class="form-label">Discount (%)</label>
+                        <input type="number" id="dicountPercentage"  oninput="discountValidation()" class="form-control">
+                        <span id="dicountPercentageError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label"> Max Discount (Rs)</label>
+                        <input type="number" id="maxDiscountValue"  oninput="maxdiscountValidation()" class="form-control">
+                        <span id="maxDiscountValueError"></span>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Description (T&amp;C)</label>
+                        <textarea name="" id="description" cols="45" rows="5"  onkeyup="discriptionValidation()" class="form-control"></textarea>
+                        <span id="descriptionError"></span>
+                    </div>
+                    <div class="d-grid">
+                        <button class="btn btn-primary"  onclick="validationCoupon(event)">Create Coupon</button>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- card body .// -->
+    </div> <!-- card .// -->
+</section> <!-- content-main end// -->
+
+{{>admin-partials/adminFooter}}
+</main>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    
+    
+
+<script>
+
+
+let couponName=document.getElementById('couponName')
+let couponNameError=document.getElementById('couponNameError')
+
+
+let validity=document.getElementById('validity')
+let validityError=document.getElementById('validityError')
+
+
+let minAmount=document.getElementById('minAmount')
+let minAmountError=document.getElementById('minAmountError')
+
+let dicountPercentage=document.getElementById('dicountPercentage')
+let discountPercentageError=document.getElementById('dicountPercentageError')
+
+let maxDiscount=document.getElementById('maxDiscountValue')
+let maxDiscountValueError=document.getElementById('maxDiscountValueError')
+
+let description=document.getElementById('description')
+let descriptionError=document.getElementById('descriptionError')
+
+
+
+
+function couponNameValidation(){
+
+let   couponValue= couponName.value
+    if(couponValue.trim()==0){
+        couponNameError.innerHTML='coupon name is required'
+        couponNameError.style.color='red'
+        return false
+    }
+
+    couponNameError.innerHTML=''
+    return true
+    
+}
+
+
+
+function validityValidation(){
+
+    let validityValue=validity.value
+
+    if(validityValue==''){
+        validityError.innerHTML='validity is required'
+        validityError.style.color='red'
+        return false
+    }
+    validityError.innerHTML=''
+    return true
+
+}
+
+function minPurchaseValidation(){
+
+    let minAmountValue=minAmount.value
+
+    if(minAmountValue.trim()==0){
+        minAmountError.innerHTML='feild is required'
+        minAmountError.style.color='red'
+        return false
+    }
+
+    if(minAmountValue<0){
+        minAmountError.innerHTML='require greather than zero'
+        minAmountError.style.color='red'
+        return false
+    }
+
+    minAmountError.innerHTML=''
+    return true
+}
+
+function discountValidation(){
+
+    let dicountPercentageValue=dicountPercentage.value
+
+    if(dicountPercentageValue.trim()==0){
+        discountPercentageError.innerHTML='feild is required'
+        discountPercentageError.style.color='red'
+        return false
+    }
+
+    if(dicountPercentageValue<0||dicountPercentageValue>99){
+        discountPercentageError.innerHTML='discount percentage should between 1 and 99'
+        discountPercentageError.style.color='red'
+        return true
+    }
+        
+    discountPercentageError.innerHTML=''
+    return true
+}
+
+
+function maxdiscountValidation(){
+
+    let maxDiscountValue=maxDiscount.value
+
+    if(maxDiscountValue.trim()==0){
+        maxDiscountValueError.innerHTML='feild is required'
+        maxDiscountValueError.style.color='red'
+        return false
+    }
+
+    if(maxDiscountValue<=0){
+        maxDiscountValueError.innerHTML='require greather than zero'
+        maxDiscountValueError.style.color='red'
+        return false
+    }
+
+    maxDiscountValueError.innerHTML=''
+    return true
+
+}
+
+function discriptionValidation(){
+
+    let descriptionValue=description.value
+    if(descriptionValue.trim()==0){
+        descriptionError.innerHTML='feild is required'
+        descriptionError.style.color='red'
+        return false
+    }
+
+    descriptionError.innerHTML=''
+    return true
+}
+
+
+
+function validationCoupon(event){
+    event.preventDefault()
+
+    if(couponNameValidation()&&validityValidation()&&minPurchaseValidation()&&discountValidation()&&maxdiscountValidation()&&discriptionValidation()){
+
+
+          $.ajax({
+            url:'/addCoupon',
+            method:'POST',
+            data:{
+                coupon:couponName.value,
+                validity:validity.value,
+                minPurchase:minAmount.value,
+                minDiscountPercentage:dicountPercentage.value,
+                maxDiscount:maxDiscountValue.value,
+                description:description.value
+            },
+             success:function(response){
+                if(response.status){
+                      Swal.fire({
+                      icon: 'success',
+                      title: 'Coupon Added Successfully!',
+                      showConfirmButton: false,
+                      timer: 2000
+                       }).then(() => {
+                      location.href = '/get-add-Coupon';
+                    });
+                }else{
+                     Swal.fire({
+                     icon: 'error',
+                     title: 'Oops...',
+                     text: 'Coupon Code already exists!',
+                     timer: 2000
+                     });
+             }
+                } 
+            })
+
+          }else{
+           return false
+    }
+
+    }
+
+
+function generateCoupon(event){
+
+      event.preventDefault()
+      
+    $.ajax({
+        url:'/generate-coupon-code',
+        method:'get',
+        success:function(response){
+            document.getElementById('couponName').value=response.codeCoupon
+        }
+
+    })
+}
+
+
+</script>

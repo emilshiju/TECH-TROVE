@@ -1,0 +1,87 @@
+{{>admin-partials/adminSideBar}}
+
+
+
+<style>
+    .row {
+        height: 100%;
+        width: 1860px;
+        margin: 0;
+        margin-left: 290px;
+    }
+
+    .container-full-height {
+        min-height: 100vh; 
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content {
+        flex: 1;
+        overflow-y: auto; 
+        padding-bottom: 20px; 
+    }
+
+    .table-responsive {
+        width: 100%;
+        height: 100%;
+    }
+
+    .table {
+        width: 100%;
+        height: 100%;
+        font-size:medium
+    }
+  
+</style>
+
+
+
+    <div class="container-fluid container-full-width">
+        <div class="row">
+
+            <!-- Main content -->
+            <div class="col-md-8">
+                <div class="content">
+                    <div class="d-flex justify-content-between flex-wrap-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard</h1>
+                        
+                    </div>
+
+                    <!-- User Table -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm  ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each user}}
+                                <tr>
+                                  
+                                    <td>{{this.firstName}}</td>
+                                    <td>{{this.lastName}}</td>
+                                    <td>{{this.password}}</td>
+                                    <td>{{this.email}}</td>
+                                     {{#if (isThirdUser @index)}}
+                                     {{#with (activeOrBlocked this.is_blocked)}}
+                                    <td><span class="badge rounded-pill {{class}}">{{text}}</span></td>
+                                    {{/with}}
+                                     {{/if}}
+                                     </tr>
+                                {{/each}}
+                                  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  

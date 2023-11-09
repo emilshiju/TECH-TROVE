@@ -1,0 +1,110 @@
+    <!-- Your existing HTML code for the menu -->
+ 
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="index.html" class="brand-wrap">
+                <img src="/admin/assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav onclick="handleMenuItemClick(event)">
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="/dashboard"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-products-list.html"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Category</span>
+                    </a>
+                    <div class="submenu">
+                       <a href="/category">Add category</a>
+                        <a href="/list-Category">Categories</a>
+                    </div>
+                </li>
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/admin-oder-list">Order list </a>
+                        {{!-- <a href="page-orders-2.html">Order list 2</a>
+                        <a href="page-orders-detail.html">Order detail</a>
+                        <a href="page-orders-tracking.html">Order tracking</a>
+                         <a href="page-invoice.html">Invoice</a> --}}
+                    </div>
+                </li>
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text"> product</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/add-Products">Add products</a>
+                        <a href="/show-Products">Product List</a>
+                    </div>
+                </li>
+              
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Users</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/alluser">All Users</a>
+                        {{!-- <a href="page-account-register.html">User registration</a>
+                        <a href="page-error-404.html">Error 404</a> --}}
+                    </div>
+                </li>
+                 <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"><i class="icon material-icons md-comment"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/get-add-Coupon">Add Coupon</a>
+                        <a href="/couponList">Coupon List</a>
+                        {{!-- <a href="page-account-register.html">User registration</a>
+                        <a href="page-error-404.html">Error 404</a> --}}
+                    </div>
+                </li>
+                    <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"><i class="icon material-icons md-comment"></i>
+                        <span class="text">Banners</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/getBannerForm">Add Banner</a>
+                        <a href="/banner-List">Banner List</a>
+                        {{!-- <a href="page-account-register.html">User registration</a>
+                        <a href="page-error-404.html">Error 404</a> --}}
+                    </div>
+                </li>
+                  <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Offers</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/get-product-Offer">Product Offer</a>
+                        <a href="/category-Offer">Category Offer</a>
+                     
+                    </div>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/salesReport"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Sales Report</span> 
+                        </a>
+                      
+                </li>
+            </ul>
+            <hr>
+            <br>
+            <br>
+        </nav>
+    </aside>
+ 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+

@@ -1,0 +1,266 @@
+
+<style>
+    .comment-form {
+     
+        width: 100%;
+        max-width: 800px; /* Adjust the max-width to your preference */
+        margin: 0 auto; /* Center the form horizontally */
+        padding: 20px; /* Add padding to create space between the form and the screen edges */
+    }
+
+    .form-contact {
+        /* Add any additional styling for the form container */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Add space between form elements */
+    }
+
+    .button-contactForm {
+        background-color: #007BFF; /* Customize the button style */
+        color: #fff;
+        padding: 10px 20px;
+    }
+    .stars {
+  display: inline-block;
+}
+
+.rating-box {
+  width: 150px; /* Adjust the width as needed */
+  display: flex;
+  justify-content: space-between;
+}
+
+.fas.fa-star {
+  font-size: 24px; /* Adjust the font size to control the size of the stars */
+  color:bisque
+
+}
+.active{
+    color: gold; 
+}
+
+      .message-container {
+          
+            text-align: center;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px;
+        }
+
+        .message {
+            font-size: 24px;
+            color: #333;
+        }
+</style>
+
+                         {{#if display}}
+                            <div class="comment-form">
+                                <br><br><br><br>
+                                <h4 class="mb-15">Leave a Comment</h4>
+                                
+                                   <div class="rating-box" id="ratingStars">
+    
+                                    </div>
+                                     <br>
+                                      <div>
+                                    <button class="btn btn-sm" onclick="rateStar()">Add Star</button>
+                                      </div>
+
+                                   <br>
+                                 <div >
+                               
+                                </div>
+                                   <br>
+
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-12">
+                                        <form class="form-contact comment_form"  id="commentForm">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control w-100" name="comment" id="comment"  oninput="ValidateComment()" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                                        <span id="commentError"></span>
+                                                    </div>
+                                                </div>
+                                                {{!-- <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control" name="name" id="name" type="text"  oninput="ValidateName()" placeholder="Name">
+                                                        <span id="nameError"></span>
+                                                    </div>
+                                                </div> --}}
+                                             
+                                               
+                                            </div>
+                                        
+                                        <input type="hidden"  id="productId" value="{{productId}}">
+                                                <button  onclick=" formSubmit(event)" >Post Comment</button>
+                                           
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {{else}}
+                            <br>
+                           
+                                 <div class="message-container" style="margin-top: 200px;">
+                                    <h2 class="message">Haven't purchased this product?</h2>
+                                     <p class="message">Sorry! You are not allowed to review this product since you haven't bought it on Tech Trove.</p>
+                                  </div>
+                            {{/if}}
+                       
+
+                               
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+                   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                   
+
+            <script>
+  let ratings={{{ratings}}}
+const ratingStars = document.getElementById('ratingStars');
+      ratingStars.innerHTML = ''; // Clear any existing stars
+      for (let i = 0; i < ratings; i++) {
+        const star = document.createElement('i');
+        star.className = 'fas fa-star active';
+        ratingStars.appendChild(star);
+      }
+
+
+                 
+
+                    const reviewPattern = /^.*\S.*$/
+
+                    function ValidateComment(){
+                         let comment=document.getElementById('comment')
+                    let commentValue=comment.value
+                 
+                    let commentError=document.getElementById('commentError')
+                    
+                        if(commentValue.trim().length===0){
+                            commentError.innerHTML='feild is required'
+                            commentError.style.color='red'
+                            return false
+                        }
+
+                        if(!commentValue.match(reviewPattern)){
+                            commentError.innerHTML='enter correct way'
+                            commentError.style.color='red'
+                            return false
+                        }
+
+                        commentError.innerHTML=''
+                        return true
+                    }
+
+
+                    
+
+                    
+                     function ValidateName(){
+                      const namePattern = /^[A-Za-z\s.'-]+$/;
+                      let name=document.getElementById('name')
+                    let nameValue=name.value
+                    let nameError=document.getElementById('nameError')
+
+                        if(nameValue.trim()==0){
+                            nameError.innerHTML='feild is required'
+                            nameError.style.color='red'
+                            return false
+                        }
+
+                        if(!nameValue.match(namePattern)){
+                            nameError.innerHTML='check the feild'
+                            nameError.style.color='red'
+                            return false
+                        }
+                        nameError.innerHTML=''
+                        return true
+
+                     }
+
+
+
+
+                   </script>
+        
+
+<script>
+  
+
+var rating;
+
+    function rateStar() {
+  Swal.fire({
+    title: 'Enter star rating:',
+    input: 'number',
+    inputAttributes: {
+      autocapitalize: 'off',
+    },
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    showLoaderOnConfirm: true,
+    preConfirm: (rating) => {
+      // Validate the user's input
+      if (rating >= 1 && rating <= 5) {
+        return rating;
+      } else {
+        Swal.showValidationMessage('Please enter a number between 1 and 5');
+        return false;
+      }
+    },
+    allowOutsideClick: () => !Swal.isLoading(),
+  }).then((result) => {
+    if (result.isConfirmed) {
+       rating = result.value;
+      const ratingStars = document.getElementById('ratingStars');
+      ratingStars.innerHTML = ''; // Clear any existing stars
+      for (let i = 0; i < rating; i++) {
+        const star = document.createElement('i');
+        star.className = 'fas fa-star active';
+        ratingStars.appendChild(star);
+      }
+    }
+  });
+}
+
+
+
+function formSubmit(event){
+  event.preventDefault()
+
+  let comments=document.getElementById('comment')
+  let commentValues=comments.value
+
+ 
+  let product=document.getElementById('productId')
+  let productId=product.value
+
+
+
+if(rating == undefined){
+  rating=0;
+}
+  event.preventDefault()
+
+  if(ValidateComment()){
+    
+    $.ajax({
+      url:'/rateProduct',
+      method:'POST',
+      data:{
+        review:commentValues,
+        productId:productId,
+        ratingValue:rating
+      },
+      success:(response)=>{
+        Swal.fire(response.message)
+      }
+    })
+  }
+
+}
+
+</script>

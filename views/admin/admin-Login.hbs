@@ -1,0 +1,54 @@
+
+
+
+
+<div class="content-main  d-flex justify-content-center align-items-center min-vh-100">
+    <div class="container " style="max-width: 600px;">
+        <div class="row">
+            <div class="col-lg-12 mx-auto text-center">
+                <div class="login_wrap widget-taber-content p-40 background-white border-radius-15 shadow-lg">
+                    <div class="padding_eight_all bg-white">
+                        <div class="text-center">
+                            <h2 class="mb-30">Admin Login</h2>
+                        </div>
+                        <form action="/admin" method="post" id="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-lg" id="email"   name="email" placeholder="Your Email">
+                                <span id="emailError"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-lg" id="password"   name="password" placeholder="Password">
+                                <span id="passwordError"></span>
+                            </div>
+                            {{#if message}}
+                            <span id="serverError" onkeyup="serverErrorMessage()">{{message}}</span>
+                            {{/if}}
+                            <div class="login_footer form-group text-center">
+                                
+                                {{!-- <a class="text-muted" href="#">Forgot password?</a> --}}
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">Log in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function serverErrorMessage(){
+        const serverError=document.getElementById('serverError')
+        if(serverError){
+            setTimeout(()=>{
+                serverError.textContent=''
+            },1000)
+        }
+    }
+
+    setTimeout(serverErrorMessage)
+</script>

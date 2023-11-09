@@ -1,0 +1,136 @@
+
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">User Lists </h2>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                    {{!-- <div class="row gx-3">
+                        <div class="col-lg-4 col-md-6 me-auto">
+                            <input type="text" placeholder="Search..." class="form-control">
+                        </div>
+                        <div class="col-lg-2 col-6 col-md-3">
+                            <select class="form-select">
+                                <option>Status</option>
+                                <option>Active</option>
+                                <option>Disabled</option>
+                                <option>Show all</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-6 col-md-3">
+                            <select class="form-select">
+                                <option>Show 20</option>
+                                <option>Show 30</option>
+                                <option>Show 40</option>
+                            </select>
+                        </div>
+                    </div> --}}
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col" class="text-center"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each users}}
+                                <tr>
+                                    <td>0901</td>
+                                    <td><b>{{this.firstName}} {{this.lastName}}</b></td>
+                                    <td>{{this.email}}</td>
+                                  
+                                     {{#with (activeOrBlocked this.is_blocked)}}
+                                    <td><span class="badge rounded-pill {{class}}">{{text}}</span></td>
+                                      {{/with}}
+                                    <td class="d-flex justify-content-around">
+                                        {{#if (checkActive this.is_blocked)}}
+                                             <a   onclick="blockUser('{{this._id}}')"   class="btn btn-light rounded font-sm">Block</a>
+                                        {{else}}
+                                             <a   onclick="unblockUser('{{this._id}}')" class="btn btn-light rounded font-sm">Unblock</a>
+                                        {{/if}}
+                                            <a   href="/showuser/{{this._id}}" onclick="userDetails('{{this._id}}')"  class="btn btn-md rounded font-sm">Edit</a>
+                                    </td>
+                                </tr>  
+                                {{/each}}          
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+            {{!-- <div class="pagination-area mt-15 mb-50">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-start">
+                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                        <li class="page-item"><a class="page-link" href="#">02</a></li>
+                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">16</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a></li>
+                    </ul>
+                </nav>
+            </div> --}}
+        </section> <!-- content-main end// -->
+       {{>admin-partials/adminFooter}}
+    </main>
+     <script src="/admin/assets/js/vendors/jquery-3.6.0.min.js"></script>
+
+
+    {{!-- <script src="/admin/assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/admin/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/admin/assets/js/vendors/select2.min.js"></script>
+    <script src="/admin/assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/admin/assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="/admin/assets/js/main.js" type="text/javascript"></script> --}}
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    var $j = jQuery.noConflict();
+</script>
+
+<script>
+function blockUser(userId) {
+    $j.ajax({  
+        url: '/block-User/' + userId,
+        method: 'post',
+        data: {
+            user: userId
+        },
+        success: (response) => {
+            console.log(response)
+            if (response) {
+                location.reload();
+            }
+        }
+    });
+}
+
+function unblockUser(userId) {
+    console.log("vanu")
+    $j.ajax({ 
+        url: '/unblock-User/' + userId,
+        method: 'post',
+        data: {
+            userId: userId
+        },
+        success: (response) => {
+                location.reload();
+            
+        }
+    });
+    
+}
+</script>

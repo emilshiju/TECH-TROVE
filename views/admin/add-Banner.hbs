@@ -1,0 +1,164 @@
+
+{{>admin-partials/adminSideBar}}
+<div class="main wrapper" >
+    <form   id="form" action="/addBanner" onsubmit="return submitForm(event)" method="post" enctype="multipart/form-data" >
+    <section class="content-main">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card-mb-4" style="margin-left:300px; margin-top:50px">
+                    <div class="card-header">
+                        <h4>Add Banner</h4>
+                    </div>
+                    <br>
+                    <br>
+                       {{#if message}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+            <button type="button"    class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
+            {{#if flash}}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{flash}}
+             <button type="button"    class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
+                    <div class="card-body">
+                      
+                            <div class="mb-4">
+                                <label for="name" class="form-label" >Banner Title</label>
+                                <input type="text" placeholder="Type here" class="form-control" id="title" name="title" onkeyup="titleValidation()">
+                               
+                                <span id="titleError"></span>
+                            </div>
+                             <div class="mb-4">
+                                <label for="name" class="form-label" >Description</label>
+                                <input type="link" placeholder="Type here" class="form-control" id="description" name="link"  onkeyup="descriptionValidation()">
+                               
+                                <span id="descriptionError"></span>
+                            </div>
+                            {{!-- <div class="mb-4">
+                                <label class="form-label">Full Description</label>
+                                <textarea placeholder="Type here" class="form-control" rows="4" id="description" name="description"></textarea>
+                                <span id="descriptionError"></span>
+                            </div> --}}
+                            
+                            
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card mb-4" style="margin-left: 0;margin-top:100px">
+                    <div class="card-header">
+                        <h4>Media</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-upload" id="dropZone">
+                            <img src="/admin/assets/imgs/theme/upload.svg" id="imgView1" alt="not found">
+                            <input class="form-control" id="inputimage" name="image" oninput="imageValidation()"    onchange="viewImage1(event)" type="file">
+                        
+                        </div>
+                            <span id="inputimageError"></span>
+                    </div>
+                    
+                </div>
+                <div class="mt-4 " style="padding-left: 20px;">
+                     <button type="submit" id="submit-btn"   class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    </form>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+ 
+
+<script>
+
+    const form=document.getElementById('form')
+function viewImage1(event){
+    document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[0])
+}
+</script>
+
+
+
+<script>
+
+    const names=document.getElementById('title')
+    const description=document.getElementById('description')
+
+
+    const nameError=document.getElementById('titleError')
+    const descriptionError=document.getElementById('descriptionError')
+    
+
+ function titleValidation(){
+    const nameValue=names.value
+    if(nameValue.trim()==0){
+        nameError.innerHTML='title is required',
+        nameError.style.color='red'
+        return false
+    }
+    nameError.innerHTML=''
+    return true
+ }
+ function descriptionValidation(){
+    const descriptionValue=description.value
+    if(descriptionValue.trim()==0){
+        descriptionError.innerHTML='description is required'
+        descriptionError.style.color='red'
+        return false
+    }
+    descriptionError.innerHTML=''
+    return true
+ }
+
+ function imageValidation(){
+    
+  let inputImage=document.getElementById('inputimage')
+ 
+  let inputImageError=document.getElementById('inputimageError')
+  
+ if (inputImage.files.length > 0) {
+    inputImageError.innerHTML = ''; // Clear the error message
+    return true;
+  } else {
+    inputImageError.innerHTML = 'Input image is required';
+    inputImageError.style.color = 'red';
+    return false;
+  }
+
+
+ }
+
+
+
+</script>
+
+
+
+
+<script>
+
+ function submitForm(event){
+    event.preventDefault();
+
+document.getElementById('form').submit()
+        if((titleValidation()&&descriptionValidation()&&imageValidation())){
+            
+            return true;
+        }else{
+          
+            return false;
+        }
+    }
+
+</script>

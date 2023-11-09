@@ -1,0 +1,80 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Products List</h2>
+                 
+                </div>
+                 {{#if flash}}
+                 <div class="alert alert-success alert-dimissible fase show" role="alert">
+                    {{flash}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                 </div>
+                 {{/if}}
+                 
+                </div>
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col col-check flex-grow-0">
+                            <div class="form-check ms-2">
+                                <input class="form-check-input" type="checkbox" value="">
+                            </div>
+                        </div>
+                       
+                      
+                       
+                    </div>
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+
+                {{#each  products}}
+                    <article class="itemlist">
+                          <div class="row align-items-center">
+                             <div class="col col-check flex-grow-0">
+                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox">
+                              </div>
+                          </div>
+                     <div class="col-lg-1 col-sm-4 col-8 flex-grow-1 col-name">
+                           <a class="itemside" href="#">
+                           <div class="left">
+                        <img src="{{getFirstImageUrl this.images}}" class="img-sm img-thumbnail" alt="Item">
+                     </div>
+                    <div class="info">
+                         <h6 class="mb-0">{{this.name}}</h6>
+                     </div>
+                          </a>
+                     </div>
+                    <div class="col-lg-2 col-sm-3 col-4 col-price">
+                           <span>{{this.price}}</span>
+                    </div>
+                     {{#with (activeOrBlocked  this.status)}}
+                    <div class="col-lg-2 col-sm-2 col-4 col-status">
+                        <a class="badge rounded-pill {{class}}" id="blockUnblockProduct" >{{text}}</a>
+                    </div>
+                    {{/with}} 
+             
+              
+                    <div class="col-lg-2 col-sm-1 col-2 col-action text-start" >
+                         <a href="/edit-Product/{{this._id}}" class="btn btn-sm font-sm rounded btn-brand">
+                            <i class="material-icons md-edit"></i> EDIT
+                         </a>
+                    </div>
+                 
+                </div>
+             </article>
+             {{/each}}
+    
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+           
+        </section> <!-- content-main end// -->
+           
+    {{>admin-partials/adminFooter}}
+    </main>
+
+</body>

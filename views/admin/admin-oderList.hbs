@@ -1,0 +1,171 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+        <section class="content-main">
+         
+            <div class="card mb-4">
+                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col" class="text-end"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each order}}
+                                <tr>
+                                    <td>0901</td>
+                                    <td><b>{{oders.name}}</b></td>
+                                    <td>{{oders.totalPrice}}</td>
+                                    
+                                    <td>
+                                        {{#if (eq oders.oderstatus 'placed')}}
+                                        <div class="badge rounded-pill alert-primary">{{oders.oderstatus}}</div>
+                                       {{else}}
+                                        {{#if (eq oders.oderstatus 'Dispatched')}}
+                                        <div class="badge rounded-pill alert-info">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                        {{#if (eq oders.oderstatus 'Cancel Requested')}}
+                                        <div class="badge rounded-pill alert-warning">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                        {{#if (eq oders.oderstatus 'Delivered')}}
+                                        <div class="badge rounded-pill alert-success">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                        {{#if (eq oders.oderstatus 'Return Requested')}}
+                                        <div class="badge rounded-pill alert-warning">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                         {{#if (eq oders.oderstatus 'Return Declined')}}
+                                        <div class="badge rounded-pill alert-warning">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                          {{#if (eq oders.oderstatus 'Return Accepted')}}
+                                        <div class="badge rounded-pill alert-warning">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                        {{#if (eq oders.oderstatus 'Cancel Accepted')}}
+                                        <div class="badge rounded-pill alert-success">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                        {{#if (eq oders.oderstatus 'Cancel Declined')}}
+                                            <div class="badge rounded-pill alert-danger">{{oders.oderstatus}}</div>
+                                        {{/if}}
+                                        {{/if}}
+                                    </td>
+
+                                    <td>{{formatStandardTime oders.createdAt}}</td>
+                                    <td class="text-end">
+                                        <a href="/admin-oder-details?id={{oders._id}}" class="btn btn-md rounded font-sm">Detail</a>
+                                        <div class="dropdown">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                            <div class="dropdown-menu">
+                                                {{#if (idOderStatusPlacesOrCancelled oders.oderstatus)}}
+                                                {{!-- {{#if (or (eq oders.oderstatus 'placed') (eq oders.oderstatus 'Cancel Declined'))}} --}}
+                                                <a  class="dropdown-item"  onclick="orderStatus('{{oders._id}}','Dispatched')">Dispatched</a>
+                                                {{!-- <a class="dropdown-item" onclick="cancelStatus('{{oders._id}}','{{../user._id}}','Cancel Accepted')">Cancel Oder</a> --}}
+                                                {{else}}
+                                                  {{#if (eq oders.oderstatus 'Dispatched')}}
+                                                  <a class="dropdown-item"  onclick="orderStatus('{{oders._id}}','Delivered')">Delivered</a>
+                                                  {{/if}}
+                                                  
+                                                  {{#if (eq oders.oderstatus 'Cancel Requested')}}
+                                                  <a class="dropdown-item"  onclick="cancelStatus('{{oders._id}}','{{user}}','Cancel Accepted')">Accept cancel</a>
+                                                  <a class="dropdown-item"  onclick="cancelStatus('{{oders._id}}','{{user}}','Cancel Declined')">Declien Cancel</a>
+                                                  {{/if}}
+
+                                                  {{#if (eq oders.oderstatus 'Return Requested')}}
+                                                  <a class="dropdown-item"  onclick="returnOder('{{oders._id}}','{{user}}','Return Accepted')">Accept Return</a>
+                                                  <a class="dropdown-item" onclick="returnOder('{{oders._id}}','{{user}}','Return Declined')">Decline Return </a>
+                                                  {{/if}}
+
+                                                {{/if}}
+                                            </div>
+                                        </div> <!-- dropdown //end -->
+                                    </td>
+                                  
+                                </tr>
+                                  {{/each}}
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+           
+           
+                        <!--pagination-->
+                        <div class="pagination-area mt-15 mb-sm-5 mb-lg-0 justify-content-center" style="margin-left: 350px;">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                    {{#if (gt currentPage 1)}}
+                                    <a href="/admin-oder-list?page={{substract currentPage 1}}"></a>
+                                      <li class="page-item"><a class="page-link" href="/admin-oder-list?page={{substract currentPage 1}}"><i class="fi-rs-angle-double-small-left"></i></a></li>
+                                    {{/if }}
+                                    {{#each (range 1 totalPages ) as |pageNumber index|}}
+                                     {{#if (eq pageNumber currentPage)}}
+                                    <li class="page-item  active"><a class="page-link" href="/admin-oder-list?page={{this}}">{{this}}</a></li>
+                                    {{else}}
+                                   <li class="page-item "><a class="page-link" href="/admin-oder-list?page={{this}}">{{this}}</a></li>
+                                    {{/if}}
+                                    {{/each}}
+                                    {{#if (lt currentPage totalPages)}}
+                                    
+                                     <li class="page-item"><a class="page-link" href="/admin-oder-list?page={{add currentPage}}"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                                      </a>
+                                     {{/if}}
+                                </ul>
+                            </nav>
+                        </div> 
+        </section> <!-- content-main end// -->
+       
+
+
+ 
+
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+        function orderStatus(oderId,status){
+
+            $.ajax({
+                url:'/admin/oderStatus',
+                method:'PUT',
+                data:{
+                    oderId:oderId,
+                    status:status
+
+                }
+            })
+        }
+
+        function cancelStatus(oderId,userId,status){
+        
+            $.ajax({
+                url:'/admin/cancelOder',
+                method:'PUT',
+                data:{
+                    oderId:oderId,
+                    userId:userId,
+                    status:status
+                }
+            })
+        }
+
+        function returnOder(oderId,userId,status){
+            $.ajax({
+                url:'/admin/returnOder',
+                method:'PUT',
+                data:{
+                    oderId:oderId,
+                    userId:userId,
+                    status:status
+                }
+            })
+        }
+     </script>  

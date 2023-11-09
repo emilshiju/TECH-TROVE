@@ -1,0 +1,68 @@
+{{>admin-partials/adminSideBar}}
+{{>admin-partials/adminHeader}}
+
+        <section class="content-main">
+              <h2>Banner List</h2>
+            <div class="card mb-4">
+
+                        {{#if message}}
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      {{message}}
+                      <button type="button"    class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                     {{/if}}
+                
+                <div class="card-body">
+                   
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No:</th>
+                                    <th scope="col">Banner</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col" class="text-end"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                   {{#each bannerlist}}
+                             <tr>
+                                <td>{{slno @index}}</td>
+                                <td  class="tooltip-ellipsis"><b><img class="img-fluid" src="assests/{{this.image}}" style="width: 350px; height: 150px;"></b></td>
+                                <td>{{this.title}}</td>
+                                <td>{{this._id}}</td>
+                                  <td class="text-end">
+                                        <div class="dropdown">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/get-edit-banner-form/{{this._id}}">Edit info</a>
+                                            <a class="dropdown-item" href="/delete-banner/{{this._id}}">Delete</a>      
+                                       </div>
+                                     </div> 
+                                </td>
+                             </tr>
+                               {{/each}}
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+            {{!-- <div class="pagination-area mt-15 mb-50">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-start">
+                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                        <li class="page-item"><a class="page-link" href="#">02</a></li>
+                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#">16</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a></li>
+                    </ul>
+                </nav>
+            </div> --}}
+        </section> <!-- content-main end// -->
+       
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
