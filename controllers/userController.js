@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/user.js"
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs"
 import  Jwt  from "jsonwebtoken"
 import category from "../models/category.js"
 import Product from "../models/product.js"
