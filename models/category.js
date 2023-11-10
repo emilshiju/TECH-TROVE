@@ -16,6 +16,7 @@ const cateogarySchema= new mongoose.Schema({
     },
     offer:{
         type:Number,
+        default:0,
     }
 })
 

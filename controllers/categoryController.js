@@ -67,7 +67,7 @@ export default {
       title: req.body.title,
       description: req.body.description,
       is_listed: req.body.status,
-      offer: req.body.categoryOffer,
+      // offer: req.body.categoryOffer,
     });
     req.flash("message", "successfully updated");
     res.redirect("/list-Category");

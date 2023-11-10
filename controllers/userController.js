@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/user.js"
-import bcrypt from "bcryptjs"
+import bcrypt from "bcrypt"
 import  Jwt  from "jsonwebtoken"
 import category from "../models/category.js"
 import Product from "../models/product.js"
@@ -62,8 +62,32 @@ export default{
        
         const banner=await Banner.find({})
         const categorys =await category.find({is_listed:{$ne:true}})
+        console.log("lkljojjjkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
         console.log(categorys)
-        const Products=await Product.find({status:{$ne:true}}).populate('category')
+        const Products = await Product.aggregate([
+            {
+                $match: {
+                    status: false
+                }
+            },
+            {
+                $lookup: {
+                    from: 'categories', // Assuming the collection name is 'categories'
+                    localField: 'category', // Field in the Product model that references the Category
+                    foreignField: '_id', // Field in the Category model
+                    as: 'category'
+                }
+            },
+            {
+                $unwind: '$category'
+            },
+            {
+                $match: {
+                    'category.is_listed': false
+                }
+            }
+        ]);
+        
         console.log(Products)
         const categoryImage=await Product.find({}).limit(7)
         const newArrival=await Product.find().sort({updated_At:-1}).limit(5)
@@ -412,7 +436,7 @@ export default{
 
        
         
-            const Category=await category.find({})   
+            const Category=await category.find({is_listed:false})   
             const page=parseInt(req.query.page)||1
             
             const limit=4
